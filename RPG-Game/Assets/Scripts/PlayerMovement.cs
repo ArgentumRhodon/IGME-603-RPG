@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float speed = 5f;
-    private float moveHorizontal;
+    private Vector2 movementDirection;
     public float Health = 100f;
 
     // Start is called before the first frame update
@@ -18,12 +18,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveHorizontal = Input.GetAxis("Horizontal");
+        movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveHorizontal * speed, 0f);
+        rb.velocity = movementDirection * speed;
     }
 
     public void TakeDamage(float damage)
