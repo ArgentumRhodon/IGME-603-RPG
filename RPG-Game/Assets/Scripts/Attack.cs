@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    private float damage = 10f;
+    public float damage = 10f;
     Rigidbody2D rb;
     GameObject player;
     SpriteRenderer spriteRenderer;
@@ -47,13 +47,5 @@ public class Attack : MonoBehaviour
         this.transform.position += (Vector3)vel;
         
         spriteRenderer.flipX = vel.x < 0;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<PlayerMovement>().TakeDamage(damage);
-        }
     }
 }
