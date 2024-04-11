@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Weapon_type
+public enum Charge_type
 {
-    Axe,
-    Hammer
+    Fire,
+    Lightening,
+    Ice
 }
 
-public class Weapon : MonoBehaviour
+public class Charge : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Weapon_type w_type;
+    public Charge_type c_type;
     public Sprite sprite;
     public bool equipped;
     void Start()
