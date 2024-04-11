@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private float speed = 5f;
     private float moveHorizontal;
-    private float moveVertical;
+    public float Health = 100f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,5 +24,14 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector2(moveHorizontal * speed, 0f);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
