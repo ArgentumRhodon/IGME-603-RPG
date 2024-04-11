@@ -7,12 +7,16 @@ public class Attack : MonoBehaviour
     private float damage = 10f;
     Rigidbody2D rb;
     GameObject player;
+    SpriteRenderer spriteRenderer;
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindFirstObjectByType<PlayerMovement>().gameObject;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -21,20 +25,28 @@ public class Attack : MonoBehaviour
         float sqrDistToPlayer = Vector2.SqrMagnitude(transform.position - player.transform.position);
         Debug.Log(sqrDistToPlayer);
 
-        if(sqrDistToPlayer < 25)
+        if(sqrDistToPlayer < 25 && sqrDistToPlayer > 0.01)
         {
             SeekPlayer();
-            GetComponent<Animator>().SetBool("Run", true);
+            animator.SetBool("Run", true);
         }
         else
         {
-            GetComponent<Animator>().SetBool("Run", false);
+            animator.SetBool("Run", false);
+        }
+
+        if(sqrDistToPlayer < 1)
+        {
+            animator.SetTrigger("Attack");
         }
     }
 
     void SeekPlayer()
     {
-        this.transform.position += (player.transform.position - transform.position).normalized * Time.deltaTime;
+        Vector2 vel = (player.transform.position - transform.position).normalized * Time.deltaTime;
+        this.transform.position += (Vector3)vel;
+        
+        spriteRenderer.flipX = vel.x < 0;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
