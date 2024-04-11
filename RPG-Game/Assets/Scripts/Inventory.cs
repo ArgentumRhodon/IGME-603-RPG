@@ -5,9 +5,9 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     // Start is called before the first frame update
-    List<Weapon> Weapons;
-    List<Charge> Charges;
-    List<Potion> Potions;
+    public List<Weapon> Weapons;
+    public List<Charge> Charges;
+    public List<Potion> Potions;
     void Start()
     {
         Weapons = new List<Weapon>();
