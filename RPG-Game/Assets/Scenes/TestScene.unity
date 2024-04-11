@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 1732131914}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,7 +264,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -359,6 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e828fbbd8ac3e014b88969c6c052c823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
 --- !u!50 &1732131914
 Rigidbody2D:
   serializedVersion: 4
@@ -394,10 +395,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2153744700444886252, guid: 2178e3b2e33bd3044922135d30290e1b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 36b2ff5b073af734f9fc12fa35fff12d, type: 2}
     - target: {fileID: 2466352222644376553, guid: 2178e3b2e33bd3044922135d30290e1b, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2883205455623061615, guid: 2178e3b2e33bd3044922135d30290e1b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2336193686058182671, guid: 7393c09b1ecd6a74ea1feca72f9d29a4, type: 3}
     - target: {fileID: 7590699151963821670, guid: 2178e3b2e33bd3044922135d30290e1b, type: 3}
       propertyPath: m_RootOrder
       value: 1
