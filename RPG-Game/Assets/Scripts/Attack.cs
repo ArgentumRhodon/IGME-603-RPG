@@ -23,7 +23,6 @@ public class Attack : MonoBehaviour
     void Update()
     {
         float sqrDistToPlayer = Vector2.SqrMagnitude(transform.position - player.transform.position);
-        Debug.Log(sqrDistToPlayer);
 
         if(sqrDistToPlayer < 25 && sqrDistToPlayer > 0.01)
         {
