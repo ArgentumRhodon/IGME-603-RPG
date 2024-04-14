@@ -25,4 +25,5 @@ public class Charge : MonoBehaviour
     {
         
     }
+    
 }

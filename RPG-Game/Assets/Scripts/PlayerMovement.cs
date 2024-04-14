@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         movment = new PlayerMovementControls();
         rb = GetComponent<Rigidbody2D>();
+        rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
     }
 
     private void OnEnable()
