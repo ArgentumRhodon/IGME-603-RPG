@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //animator.SetBool("Attack", false);
         rb = GetComponent<Rigidbody2D>();
+        rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
         attack = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Attack>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
