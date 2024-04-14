@@ -2,22 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    private Rigidbody2D rb = null;
     private float speed = 5f;
-    private Vector2 movementDirection;
+    private Vector2 movementVector = Vector2.zero;
+    private Vector2 movementDirection = Vector2.zero;
     public float Health = 100f;
     private Attack attack;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private PlayerMovementControls movment = null;
+
+    private void Awake()
+    {
+        movment = new PlayerMovementControls();
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void OnEnable()
+    {
+        movment.Enable();
+        movment.Player.Movment.performed += OnMovementPerformed;
+        movment.Player.Movment.canceled += OnMovementCancelled;
+    }
+
+    private void OnDisable()
+    {
+        movment.Disable();
+        movment.Player.Movment.performed -= OnMovementPerformed;
+        movment.Player.Movment.canceled -= OnMovementCancelled;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        //animator.SetBool("Attack", false);
-        rb = GetComponent<Rigidbody2D>();
         attack = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Attack>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -47,11 +68,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        rb.velocity = movementDirection * speed;
+        rb.velocity = movementVector * speed;
     }
 
+    private void OnMovementPerformed(InputAction.CallbackContext value)
+    {
+        movementVector = value.ReadValue<Vector2>();
+    }
+
+    private void OnMovementCancelled(InputAction.CallbackContext value)
+    {
+        movementVector = Vector2.zero;
+    }
     public void TakeDamage(float damage)
     {
         Debug.Log("Taking Damage!");
