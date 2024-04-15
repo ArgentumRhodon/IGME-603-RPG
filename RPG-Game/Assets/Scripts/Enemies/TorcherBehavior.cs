@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -10,7 +11,8 @@ enum State
 {
     Idle,
     SeekPlayer,
-    Attack
+    Attack,
+    Dying
 }
 
 public class TorcherBehavior : MonoBehaviour
@@ -22,6 +24,7 @@ public class TorcherBehavior : MonoBehaviour
     private GameObject player;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private Health health;
 
     [SerializeField]
     private GameObject torchCollider;
@@ -34,26 +37,43 @@ public class TorcherBehavior : MonoBehaviour
         player = GameObject.FindFirstObjectByType<PlayerMovement>().gameObject;
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        health = GetComponent<Health>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(player == null) return; 
+
+        float playerHealth = player.GetComponent<Health>().currentHealth;
         float sqrDistToPlayer = Vector2.SqrMagnitude(transform.position - player.transform.position);
+
+        if(playerHealth <= 0)
+        {
+            StateExit(State.Idle);
+            return;
+        }
 
         switch (activeState)
         {
             case State.Idle:
                 if (sqrDistToPlayer < 25 && sqrDistToPlayer > 0.01)
                 {
-                    StateEnter(State.SeekPlayer);
+                    StateExit(State.SeekPlayer);
                 }
                 break;
             case State.SeekPlayer:
                 SeekPlayer();
                 if (sqrDistToPlayer > 25) StateExit(State.Idle);
-                if (sqrDistToPlayer < 0.5) StateEnter(State.Attack);
+                if (sqrDistToPlayer < 0.5) StateExit(State.Attack);
                 break;
+            case State.Dying:
+                break;
+        }
+
+        if(health.currentHealth <= 0)
+        {
+            StateExit(State.Dying);
         }
     }
 
@@ -114,6 +134,8 @@ public class TorcherBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log($"{collision.gameObject.name} collided with {gameObject.name}");
+
+        health.ReduceHealth(collision.gameObject.GetComponent<Damage>().amount);
 
         spriteRenderer.color = Color.red;
         Invoke("ResetSpriteColor", 0.1f);
