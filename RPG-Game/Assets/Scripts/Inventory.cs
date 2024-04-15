@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
     //public List<Weapon> Weapons;
     public List<Charge> Charges;
     public List<Potion> Potions;
+    public Charge cur_charge;
     public Collider2D item;
     void Start()
     {
@@ -29,6 +30,7 @@ public class Inventory : MonoBehaviour
                 if (c != null)
                 {
                     pickup(c);
+                    //equip(c);
                     item.transform.position = new Vector3(-10, 4, 0);
                 }
                 //else print("not charge");
@@ -74,6 +76,13 @@ public class Inventory : MonoBehaviour
     void equip(Charge c)
     {
         Charges.Find(x => x.c_type == c.c_type).equipped = true;
+        cur_charge = c;
+        //switch slot
+    }
+    void unequip(Charge c)
+    {
+        Charges.Find(x => x.c_type == c.c_type).equipped = false;
+        cur_charge = null;
         //switch slot
     }
     void equip(Potion p)
