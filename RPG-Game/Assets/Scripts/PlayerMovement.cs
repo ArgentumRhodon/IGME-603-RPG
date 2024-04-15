@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movementVector = Vector2.zero;
     private Vector2 movementDirection = Vector2.zero;
     public float Health = 100f;
-    private Attack attack;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private PlayerMovementControls movment = null;
@@ -39,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        attack = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Attack>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -60,11 +58,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             animator.SetBool("Run", false);
-        }
-
-        if(Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger("Attack");
         }
     }
 
@@ -89,13 +82,6 @@ public class PlayerMovement : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(gameObject);
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            TakeDamage(attack.damage);
         }
     }
 }
