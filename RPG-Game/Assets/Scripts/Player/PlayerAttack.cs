@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public int damage = 10;
+
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     [SerializeField]

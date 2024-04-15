@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
 using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 enum State
 {
@@ -13,11 +15,16 @@ enum State
 
 public class TorcherBehavior : MonoBehaviour
 {
+    public int damage = 10;
+
     private State activeState;
 
     private GameObject player;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+
+    [SerializeField]
+    private GameObject torchCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +52,7 @@ public class TorcherBehavior : MonoBehaviour
             case State.SeekPlayer:
                 SeekPlayer();
                 if (sqrDistToPlayer > 25) StateExit(State.Idle);
+                if (sqrDistToPlayer < 0.5) StateEnter(State.Attack);
                 break;
         }
     }
@@ -57,12 +65,34 @@ public class TorcherBehavior : MonoBehaviour
         spriteRenderer.flipX = movement.x < 0;
     }
 
+    private void EnableTorchCollider()
+    {
+        torchCollider.SetActive(true);
+
+        if (spriteRenderer.flipX)
+        {
+            torchCollider.transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            torchCollider.transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+        }
+    }
+
+    private void DisableTorchCollider()
+    {
+        torchCollider.SetActive(false);
+    }
+
     private void StateEnter(State state)
     {
         switch (state)
         {
             case State.SeekPlayer:
                 animator.SetBool("Run", true);
+                break;
+            case State.Attack:
+                animator.SetTrigger("Attack");
                 break;
         }
 
@@ -83,6 +113,11 @@ public class TorcherBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Hit!");
+        Debug.Log($"{collision.gameObject.name} collided with {gameObject.name}");
+
+        spriteRenderer.color = Color.red;
+        Invoke("ResetSpriteColor", 0.1f);
     }
+
+    private void ResetSpriteColor() => spriteRenderer.color = Color.white;
 }
