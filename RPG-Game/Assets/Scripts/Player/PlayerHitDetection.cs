@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerHitDetection : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    private Health health;
+    private PlayerHealth health;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        health = GetComponent<Health>();
+        health = GetComponent<PlayerHealth>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

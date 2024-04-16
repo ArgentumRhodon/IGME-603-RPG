@@ -1,39 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Properties;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D rb = null;
+    [SerializeField]
     private float speed = 5f;
     private Vector2 movementVector = Vector2.zero;
-    private Vector2 movementDirection = Vector2.zero;
-    public float Health = 100f;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-    private PlayerMovementControls movment = null;
-
-    private void Awake()
-    {
-        movment = new PlayerMovementControls();
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    private void OnEnable()
-    {
-        movment.Enable();
-        movment.Player.Movment.performed += OnMovementPerformed;
-        movment.Player.Movment.canceled += OnMovementCancelled;
-    }
-
-    private void OnDisable()
-    {
-        movment.Disable();
-        movment.Player.Movment.performed -= OnMovementPerformed;
-        movment.Player.Movment.canceled -= OnMovementCancelled;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -45,14 +23,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-        if(movementDirection.magnitude > 0)
+        if(movementVector.magnitude > 0)
         {
             animator.SetBool("Run", true);
-            if(movementDirection.x != 0)
+            if(movementVector.x != 0)
             {
-                spriteRenderer.flipX = movementDirection.x < 0;
+                spriteRenderer.flipX = movementVector.x < 0;
             }
         }
         else
@@ -63,25 +39,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = movementVector * speed;
+        transform.position += (Vector3)movementVector * Time.fixedDeltaTime * speed;
     }
 
-    private void OnMovementPerformed(InputAction.CallbackContext value)
+    private void OnMove(InputValue value)
     {
-        movementVector = value.ReadValue<Vector2>();
-    }
-
-    private void OnMovementCancelled(InputAction.CallbackContext value)
-    {
-        movementVector = Vector2.zero;
-    }
-    public void TakeDamage(float damage)
-    {
-        Debug.Log("Taking Damage!");
-        Health -= damage;
-        if (Health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        movementVector = value.Get<Vector2>();
     }
 }

@@ -45,7 +45,7 @@ public class TorcherBehavior : MonoBehaviour
     {
         if(player == null) return; 
 
-        float playerHealth = player.GetComponent<Health>().currentHealth;
+        float playerHealth = player.GetComponent<PlayerHealth>().currentHealth;
         float sqrDistToPlayer = Vector2.SqrMagnitude(transform.position - player.transform.position);
 
         if(playerHealth <= 0)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -18,13 +19,11 @@ public class PlayerAttack : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnAttack()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger("Attack");
-        }
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
+        animator.SetTrigger("Attack");
     }
 
     public void EnableSwordCollider()
