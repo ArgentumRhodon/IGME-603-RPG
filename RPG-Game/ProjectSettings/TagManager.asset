@@ -6,16 +6,17 @@ TagManager:
   tags:
   - Item
   - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Players
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Enemies
+  - Player Damage
+  - Enemy Damage
   - 
   - 
   - 
