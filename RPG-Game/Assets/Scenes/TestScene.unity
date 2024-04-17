@@ -143,6 +143,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 2336193686058182671, guid: 7393c09b1ecd6a74ea1feca72f9d29a4, type: 3}
+    - target: {fileID: 2933311980902272336, guid: 2178e3b2e33bd3044922135d30290e1b, type: 3}
+      propertyPath: diedPanel
+      value: 
+      objectReference: {fileID: 847090315}
     - target: {fileID: 4123004110056629048, guid: 2178e3b2e33bd3044922135d30290e1b, type: 3}
       propertyPath: m_Size.x
       value: 0.50200343
@@ -2877,7 +2881,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 728.86, y: -17.900024}
+  m_AnchoredPosition: {x: 729, y: 0}
   m_SizeDelta: {x: 52.4399, y: 54.0123}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1370350472

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Properties;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private PlayerMovementControls movment = null;
+    public GameObject diedPanel;
 
     private void Awake()
     {
@@ -43,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         attack = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Attack>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        diedPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -89,7 +92,8 @@ public class PlayerMovement : MonoBehaviour
         Health -= damage;
         if (Health <= 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            diedPanel.SetActive(true);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
