@@ -1,29 +1,29 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-enum TorcherState
+enum MimicState
 {
     Idle,
     SeekPlayer,
-    Attack,
-    Dying
+    Lit,
+    Exploding,
 }
 
-public class TorcherBehavior : MonoBehaviour
+public class TNTMimicBehavior : MonoBehaviour
 {
-    private TorcherState activeState;
+    private MimicState activeState;
 
     private GameObject player;
+    [SerializeField]
+    private GameObject explosionCollider;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Health health;
 
-    [SerializeField]
-    private GameObject torchCollider;
-
     // Start is called before the first frame update
     void Start()
     {
-        activeState = TorcherState.Idle;
+        activeState = MimicState.Idle;
 
         player = GameObject.FindFirstObjectByType<PlayerMovement>().gameObject;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -34,37 +34,39 @@ public class TorcherBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player == null) return; 
+        if (player == null) return;
 
         float playerHealth = player.GetComponent<PlayerHealth>().currentHealth;
         float sqrDistToPlayer = Vector2.SqrMagnitude(transform.position - player.transform.position);
 
-        if(playerHealth <= 0)
+        if (playerHealth <= 0)
         {
-            StateExit(TorcherState.Idle);
+            StateExit(MimicState.Idle);
             return;
         }
 
         switch (activeState)
         {
-            case TorcherState.Idle:
-                if (sqrDistToPlayer < 25 && sqrDistToPlayer > 0.01)
+            case MimicState.Idle:
+                if (sqrDistToPlayer < 5 && sqrDistToPlayer > 0.01)
                 {
-                    StateExit(TorcherState.SeekPlayer);
+                    StateExit(MimicState.SeekPlayer);
                 }
                 break;
-            case TorcherState.SeekPlayer:
+            case MimicState.SeekPlayer:
                 SeekPlayer();
-                if (sqrDistToPlayer > 25) StateExit(TorcherState.Idle);
-                if (sqrDistToPlayer < 0.5) StateExit(TorcherState.Attack);
+                // if (sqrDistToPlayer > 5) StateExit(MimicState.Idle);
+                if (sqrDistToPlayer < 0.5) StateExit(MimicState.Lit);
                 break;
-            case TorcherState.Dying:
+            case MimicState.Lit:
+                break;
+            case MimicState.Exploding:
                 break;
         }
 
-        if(health.currentHealth <= 0 && activeState != TorcherState.Dying)
+        if (health.currentHealth <= 0 && activeState != MimicState.Lit && activeState != MimicState.Exploding)
         {
-            StateExit(TorcherState.Dying);
+            StateExit(MimicState.Lit);
         }
     }
 
@@ -76,53 +78,55 @@ public class TorcherBehavior : MonoBehaviour
         spriteRenderer.flipX = movement.x < 0;
     }
 
-    private void EnableTorchCollider()
+    private void EnableExplosionCollider()
     {
-        torchCollider.SetActive(true);
-
-        if (spriteRenderer.flipX)
-        {
-            torchCollider.transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
-        }
-        else
-        {
-            torchCollider.transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
-        }
+        explosionCollider.SetActive(true);
     }
 
-    private void DisableTorchCollider()
+    private void DisableExplosionCollider()
     {
-        torchCollider.SetActive(false);
+        explosionCollider.SetActive(false); 
     }
 
-    private void StateEnter(TorcherState state)
+    private void StateEnter(MimicState state)
     {
+        Debug.Log("Entering State: " + state);
+
         switch (state)
         {
-            case TorcherState.SeekPlayer:
+            case MimicState.SeekPlayer:
                 animator.SetBool("Run", true);
                 break;
-            case TorcherState.Attack:
-                animator.SetTrigger("Attack");
+            case MimicState.Lit:
+                animator.SetBool("Lit", true);
+                Invoke("Explode", 0.5f);
                 break;
-            case TorcherState.Dying:
-                animator.SetTrigger("Death");
+            case MimicState.Exploding:
+                animator.SetTrigger("Explode");
                 break;
         }
 
         activeState = state;
     }
 
-    private void StateExit(TorcherState nextState)
-    { 
-        switch (activeState) 
+    private void StateExit(MimicState nextState)
+    {
+        switch (activeState)
         {
-            case TorcherState.SeekPlayer:
+            case MimicState.SeekPlayer:
                 animator.SetBool("Run", false);
+                break;
+            case MimicState.Lit:
+                animator.SetBool("Lit", false);
                 break;
         }
 
         StateEnter(nextState);
+    }
+
+    private void Explode()
+    {
+        StateExit(MimicState.Exploding);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

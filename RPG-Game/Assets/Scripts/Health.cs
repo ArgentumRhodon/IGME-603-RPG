@@ -8,7 +8,6 @@ public class Health : MonoBehaviour
 
     public float maxHealth;
     public float currentHealth;
-    private bool dying = false;
 
     private void Start()
     {
@@ -29,15 +28,6 @@ public class Health : MonoBehaviour
     public void ResetHealth()
     {
         currentHealth = maxHealth;
-    }
-
-    private void Update()
-    {
-        if(currentHealth <= 0 && !dying)
-        {
-            dying = true;
-            animator.SetTrigger("Death");
-        }
     }
 
     private void Die()
