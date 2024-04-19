@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5944292702098177760}
   - component: {fileID: 2971798226641237776}
   - component: {fileID: 2230333896138272523}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: ExplosionCollider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1a4fa998e538d47955cb6c079c4273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 35
+  amount: 75
 --- !u!1001 &8359078038803633738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,7 +119,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2253911629886400664, guid: 0a01effcbb37a0043a2d01393f056965, type: 3}
       propertyPath: m_Name
-      value: TNTMimic Variant
+      value: TNTMimic
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: 0a01effcbb37a0043a2d01393f056965, type: 3}
       propertyPath: m_Layer
@@ -139,7 +139,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: bd7492de587b2ee4fbcab4f3bb63ef16, type: 2}
     - target: {fileID: 7878350319992209165, guid: 0a01effcbb37a0043a2d01393f056965, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 0a01effcbb37a0043a2d01393f056965, type: 3}
       propertyPath: m_LocalPosition.x
