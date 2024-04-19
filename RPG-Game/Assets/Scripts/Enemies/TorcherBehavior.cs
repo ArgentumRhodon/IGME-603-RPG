@@ -55,7 +55,7 @@ public class TorcherBehavior : MonoBehaviour
                 break;
             case TorcherState.SeekPlayer:
                 SeekPlayer();
-                if (sqrDistToPlayer > 25) StateExit(TorcherState.Idle);
+                // if (sqrDistToPlayer > 25) StateExit(TorcherState.Idle);
                 if (sqrDistToPlayer < 0.5) StateExit(TorcherState.Attack);
                 break;
             case TorcherState.Dying:
