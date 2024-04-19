@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private GameObject diedPanel;
+    [SerializeField] private HealthBar healthBar;
 
     public float maxHealth;
     public float currentHealth;
@@ -21,16 +22,19 @@ public class PlayerHealth : MonoBehaviour
     public void IncreaseHealth(float value)
     {
         currentHealth += value;
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
     public void ReduceHealth(float value)
     {
         currentHealth -= value;
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
     public void ResetHealth()
     {
         currentHealth = maxHealth;
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
     private void Update()
