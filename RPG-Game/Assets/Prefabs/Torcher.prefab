@@ -269,7 +269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86812d7a38e48be47abd75e6861bf92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
   torchCollider: {fileID: 7745177723316863843}
 --- !u!114 &2974443023664854307
 MonoBehaviour:
@@ -283,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f36b406a7f623d442ab46a3f3d1e26fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 30
   currentHealth: 0
 --- !u!50 &6345359675251265409
 Rigidbody2D:
