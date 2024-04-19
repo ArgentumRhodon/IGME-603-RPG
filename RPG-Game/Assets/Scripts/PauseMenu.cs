@@ -8,7 +8,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject pausemenu;
     public GameObject pausebutton;
     public GameObject controlmenu;
+    public GameObject statesmenu;
     public bool pause = false;
+    public bool Showstates = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,10 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ShowPlayerStates();
         }
     }
 
@@ -62,5 +68,21 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void ShowPlayerStates()
+    {
+        if (Showstates)
+        {
+            statesmenu.SetActive(false);
+            Showstates = false;
+            Time.timeScale = 1;
+        }
+        else 
+        {
+            statesmenu.SetActive(true);
+            Showstates = true;
+            Time.timeScale = 0;
+        }
     }
 }

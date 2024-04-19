@@ -161,7 +161,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.78, y: 0.91}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb667e3083fa2c41b72e2f36673793e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  speed: 5
 --- !u!114 &7905622986221561101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,9 +219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b252c9212aea44d80f1176c697b2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weapons: []
   Charges: []
   Potions: []
+  item: {fileID: 0}
 --- !u!61 &4123004110056629048
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -259,7 +259,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.42307693, y: -0.61538464}
     oldSize: {x: 0.78, y: 0.91}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.78, y: 0.91}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
