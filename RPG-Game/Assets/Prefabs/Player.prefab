@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 7590699151963821670}
   - component: {fileID: 2883205455623061615}
   - component: {fileID: 4084591660891939277}
-  - component: {fileID: 2933311980902272336}
   - component: {fileID: 7905622986221561101}
   - component: {fileID: 4123004110056629048}
   - component: {fileID: 2153744700444886252}
@@ -113,7 +112,7 @@ Transform:
   m_Children:
   - {fileID: 851123475218304034}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2883205455623061615
 SpriteRenderer:
@@ -194,19 +193,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &2933311980902272336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2466352222644376553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feb667e3083fa2c41b72e2f36673793e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
 --- !u!114 &7905622986221561101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Charges: []
   Potions: []
+  cur_charge: {fileID: 0}
   item: {fileID: 0}
 --- !u!61 &4123004110056629048
 BoxCollider2D:
