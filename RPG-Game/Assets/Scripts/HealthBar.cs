@@ -10,7 +10,7 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthBar = this.transform.GetChild(1).GetComponent<Image>();
+        healthBar = this.transform.GetChild(2).GetComponent<Image>();
     }
 
     public void UpdateHealthBar(float health, float maxHealth)

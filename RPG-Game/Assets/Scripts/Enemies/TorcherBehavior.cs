@@ -1,6 +1,6 @@
 using UnityEngine;
 
-enum State
+enum TorcherState
 {
     Idle,
     SeekPlayer,
@@ -10,9 +10,7 @@ enum State
 
 public class TorcherBehavior : MonoBehaviour
 {
-    public int damage = 10;
-
-    private State activeState;
+    private TorcherState activeState;
 
     private GameObject player;
     private SpriteRenderer spriteRenderer;
@@ -25,7 +23,7 @@ public class TorcherBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        activeState = State.Idle;
+        activeState = TorcherState.Idle;
 
         player = GameObject.FindFirstObjectByType<PlayerMovement>().gameObject;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -43,30 +41,30 @@ public class TorcherBehavior : MonoBehaviour
 
         if(playerHealth <= 0)
         {
-            StateExit(State.Idle);
+            StateExit(TorcherState.Idle);
             return;
         }
 
         switch (activeState)
         {
-            case State.Idle:
+            case TorcherState.Idle:
                 if (sqrDistToPlayer < 25 && sqrDistToPlayer > 0.01)
                 {
-                    StateExit(State.SeekPlayer);
+                    StateExit(TorcherState.SeekPlayer);
                 }
                 break;
-            case State.SeekPlayer:
+            case TorcherState.SeekPlayer:
                 SeekPlayer();
-                if (sqrDistToPlayer > 25) StateExit(State.Idle);
-                if (sqrDistToPlayer < 0.5) StateExit(State.Attack);
+                // if (sqrDistToPlayer > 25) StateExit(TorcherState.Idle);
+                if (sqrDistToPlayer < 0.5) StateExit(TorcherState.Attack);
                 break;
-            case State.Dying:
+            case TorcherState.Dying:
                 break;
         }
 
-        if(health.currentHealth <= 0)
+        if(health.currentHealth <= 0 && activeState != TorcherState.Dying)
         {
-            StateExit(State.Dying);
+            StateExit(TorcherState.Dying);
         }
     }
 
@@ -97,26 +95,29 @@ public class TorcherBehavior : MonoBehaviour
         torchCollider.SetActive(false);
     }
 
-    private void StateEnter(State state)
+    private void StateEnter(TorcherState state)
     {
         switch (state)
         {
-            case State.SeekPlayer:
+            case TorcherState.SeekPlayer:
                 animator.SetBool("Run", true);
                 break;
-            case State.Attack:
+            case TorcherState.Attack:
                 animator.SetTrigger("Attack");
+                break;
+            case TorcherState.Dying:
+                animator.SetTrigger("Death");
                 break;
         }
 
         activeState = state;
     }
 
-    private void StateExit(State nextState)
+    private void StateExit(TorcherState nextState)
     { 
         switch (activeState) 
         {
-            case State.SeekPlayer:
+            case TorcherState.SeekPlayer:
                 animator.SetBool("Run", false);
                 break;
         }
