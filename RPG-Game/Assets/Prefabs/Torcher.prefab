@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3219029157999134959}
+  m_Father: {fileID: 8764602589855432614}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &7787392327453374820
@@ -87,7 +87,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7745177723316863843}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -129,7 +129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2253911629886400664, guid: e12ba454bd2451e46bb5ea60ec019b41, type: 3}
       propertyPath: m_Name
-      value: Torcher Variant
+      value: Torcher
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: e12ba454bd2451e46bb5ea60ec019b41, type: 3}
       propertyPath: m_Layer
@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 5a383a7eee214d440b422f6c0f9a4e00, type: 2}
     - target: {fileID: 7878350319992209165, guid: e12ba454bd2451e46bb5ea60ec019b41, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: e12ba454bd2451e46bb5ea60ec019b41, type: 3}
       propertyPath: m_LocalPosition.x
@@ -207,7 +207,7 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6345359675251265409}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: e12ba454bd2451e46bb5ea60ec019b41, type: 3}
---- !u!1 &2396393810527412362 stripped
+--- !u!1 &8381169296151844803 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2253911629886400664, guid: e12ba454bd2451e46bb5ea60ec019b41, type: 3}
   m_PrefabInstance: {fileID: 1510845806972059819}
@@ -218,7 +218,7 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2396393810527412362}
+  m_GameObject: {fileID: 8381169296151844803}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -263,13 +263,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2396393810527412362}
+  m_GameObject: {fileID: 8381169296151844803}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86812d7a38e48be47abd75e6861bf92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
   torchCollider: {fileID: 7745177723316863843}
 --- !u!114 &2974443023664854307
 MonoBehaviour:
@@ -277,13 +276,13 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2396393810527412362}
+  m_GameObject: {fileID: 8381169296151844803}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f36b406a7f623d442ab46a3f3d1e26fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 30
   currentHealth: 0
 --- !u!50 &6345359675251265409
 Rigidbody2D:
@@ -292,7 +291,7 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2396393810527412362}
+  m_GameObject: {fileID: 8381169296151844803}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -312,7 +311,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!4 &3219029157999134959 stripped
+--- !u!4 &8764602589855432614 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: e12ba454bd2451e46bb5ea60ec019b41, type: 3}
   m_PrefabInstance: {fileID: 1510845806972059819}
