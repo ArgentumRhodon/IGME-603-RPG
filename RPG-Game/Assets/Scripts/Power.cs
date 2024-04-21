@@ -33,6 +33,7 @@ public class Power : MonoBehaviour
         {
             damage = 10;
             ischarge = false;
+            transform.gameObject.GetComponent<Damage>().amount = damage;
             return;
         }
         ischarge = true;
@@ -70,6 +71,7 @@ public class Power : MonoBehaviour
                 }
                 break;
         }
+        transform.gameObject.GetComponent<Damage>().amount = damage;
     }
 }
 
