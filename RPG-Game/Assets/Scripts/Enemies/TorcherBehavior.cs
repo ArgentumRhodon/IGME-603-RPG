@@ -16,7 +16,7 @@ public class TorcherBehavior : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Health health;
-
+    public int playercombo;
     [SerializeField]
     private GameObject torchCollider;
 
@@ -29,6 +29,7 @@ public class TorcherBehavior : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
+        playercombo = 0;
     }
 
     // Update is called once per frame
@@ -130,6 +131,12 @@ public class TorcherBehavior : MonoBehaviour
         Debug.Log($"{collision.gameObject.name} collided with {gameObject.name}");
 
         health.ReduceHealth(collision.gameObject.GetComponent<Damage>().amount);
+        if (collision.gameObject.GetComponent<Power>().ischarge == false)
+            playercombo = 0;
+        else
+        {
+            playercombo = (int)collision.gameObject.GetComponent<Power>().p_type * 3 + (int)collision.gameObject.GetComponent<Power>().c_type + 1;
+        }
 
         spriteRenderer.color = Color.red;
         Invoke("ResetSpriteColor", 0.1f);

@@ -5,8 +5,8 @@ using UnityEngine;
 public enum Charge_type
 {
     Fire,
-    Lightening,
-    Ice
+    Ice,
+    Lightening
 }
 
 public class Charge : MonoBehaviour
