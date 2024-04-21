@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1990850950770529607
 Transform:
   m_ObjectHideFlags: 0
@@ -78,11 +78,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.1547777, y: 1.2576834}
+    - - {x: 0.28200543, y: 0.94958377}
+      - {x: 0.22522634, y: 1.2635541}
       - {x: 0.46985865, y: 1.2739686}
-      - {x: 0.46666116, y: 1.0431291}
+      - {x: 0.70148987, y: 1.0196462}
       - {x: 0.46264637, y: 0.619604}
-      - {x: 0.14552656, y: 0.6361407}
+      - {x: 0.4463359, y: 0.6211346}
+      - {x: 0.28642383, y: 0.6361407}
   m_UseDelaunayMesh: 0
 --- !u!50 &4332550229324793517
 Rigidbody2D:
@@ -138,7 +140,6 @@ GameObject:
   - component: {fileID: 4926252555231694795}
   - component: {fileID: 7560477681361977880}
   - component: {fileID: 3212046807159927580}
-  - component: {fileID: 8371326865762223953}
   - component: {fileID: 3250587540140864225}
   - component: {fileID: 3205392337593768871}
   - component: {fileID: 2576767249489033064}
@@ -284,21 +285,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
---- !u!114 &8371326865762223953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4611394175518987682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0b252c9212aea44d80f1176c697b2b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Charges: []
-  Potions: []
-  item: {fileID: 0}
 --- !u!114 &3250587540140864225
 MonoBehaviour:
   m_ObjectHideFlags: 0
