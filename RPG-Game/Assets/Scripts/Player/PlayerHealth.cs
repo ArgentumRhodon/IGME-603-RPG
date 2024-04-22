@@ -49,6 +49,6 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         diedPanel.SetActive(true);
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
