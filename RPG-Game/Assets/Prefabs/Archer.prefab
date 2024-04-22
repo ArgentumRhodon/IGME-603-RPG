@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2688499386084420284}
   - component: {fileID: 4332550229324793517}
   - component: {fileID: 3003280716882138294}
+  - component: {fileID: 249016242463750508}
   m_Layer: 7
   m_Name: SwordCollider
   m_TagString: Weapon
@@ -126,6 +127,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 10
+--- !u!114 &249016242463750508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935202191297483686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9182ba71096a3544ab6ab5f70cfa95ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  c_type: 0
+  p_type: 1
 --- !u!1 &4611394175518987682
 GameObject:
   m_ObjectHideFlags: 0
