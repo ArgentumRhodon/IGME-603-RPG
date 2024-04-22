@@ -26,7 +26,7 @@ public class Power : MonoBehaviour
     {
 
     }
-    void powerup()
+    public void powerup()
     {
         if(transform.gameObject.GetComponentInParent<Slot>().cur_charge == null)
         {
