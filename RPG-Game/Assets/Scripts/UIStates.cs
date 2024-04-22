@@ -49,6 +49,7 @@ public class UIStates : MonoBehaviour
         {
             equipment.UpdateImage(currentcharge.sprite);
         }
+        else equipment.Reset();
 
     }
 
@@ -63,5 +64,12 @@ public class UIStates : MonoBehaviour
         int attack = playerAttack.damage;
         HP.text = "HP: " + currenthealth + "/" + maxhealth;
         Attack.text = "Attack: " + attack;
+        Slot chargeslot = archer.GetComponent<Slot>();
+        Charge currentcharge = chargeslot.cur_charge;
+        if (currentcharge != null)
+        {
+            equipment.UpdateImage(currentcharge.sprite);
+        }
+        else equipment.Reset();
     }
 }

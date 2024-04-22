@@ -8,10 +8,15 @@ public class UISlot : MonoBehaviour
 
     public void UpdateImage(Sprite newsprite) 
     {
-        image.sprite = newsprite;
-        if (!image.gameObject.activeSelf) 
+        if (!image.gameObject.activeSelf)
         {
             image.gameObject.SetActive(true);
         }
+        image.sprite = newsprite;
+    }
+    public void Reset()
+    {
+        image.sprite = null;
+        image.gameObject.SetActive(false);
     }
 }
