@@ -16,7 +16,15 @@ public class TorcherBehavior : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Health health;
+
     private PlayerControlManager playerControlManager;
+
+
+    public int playercombo;
+    public float timer;
+    public int hit_kf;
+    public float speed;
+    private Color color;
 
     [SerializeField]
     private GameObject torchCollider;
@@ -30,8 +38,15 @@ public class TorcherBehavior : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
+
         playerControlManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PlayerControlManager>();
         player = playerControlManager.currentPlayer;
+
+        playercombo = 0;
+        timer = 0;
+        speed = 1;
+        color = Color.white;
+
     }
 
     // Update is called once per frame
@@ -70,11 +85,58 @@ public class TorcherBehavior : MonoBehaviour
         {
             StateExit(TorcherState.Dying);
         }
+        switch (playercombo)
+        {
+            case 0:
+                break;
+            case 1:
+                color = new Vector4(1,0.5f,0,1);
+                if(timer < hit_kf && (timer + Time.deltaTime) >= hit_kf)
+                {
+                    hit_kf ++;
+                    health.ReduceHealth(2);
+                }
+                if(hit_kf > 5)
+                {
+                    playercombo = 0;
+                    timer = 0;
+                    color = Color.white;
+                    spriteRenderer.color = color;
+                    break;
+                }
+                timer += Time.deltaTime;
+                break;
+            case 2:
+                speed = 0.75f;
+                color = new Vector4(0, 0.5f, 1, 1);
+                if(timer > 1)
+                {
+                    playercombo = 0;
+                    timer = 0;
+                    speed = 1;
+                    color = Color.white;
+                    spriteRenderer.color = color;
+                    break;
+                }
+                timer += Time.deltaTime;
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            default:
+                break;
+        }
+
     }
 
     private void SeekPlayer()
     {
-        Vector2 movement = (player.transform.position - transform.position).normalized * Time.deltaTime;
+        Vector2 movement = speed * (player.transform.position - transform.position).normalized * Time.deltaTime;
         this.transform.position += (Vector3)movement;
 
         spriteRenderer.flipX = movement.x < 0;
@@ -132,12 +194,24 @@ public class TorcherBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log($"{collision.gameObject.name} collided with {gameObject.name}");
-
         health.ReduceHealth(collision.gameObject.GetComponent<Damage>().amount);
+
+        if (collision.gameObject.GetComponent<Power>().ischarge == false)
+        {
+            print("no charge");
+            playercombo = 0;
+        }  
+        else
+        {
+            playercombo = (int)collision.gameObject.GetComponent<Power>().p_type * 3 + (int)collision.gameObject.GetComponent<Power>().c_type + 1;
+            timer = 0;
+            hit_kf = 1;
+            print(playercombo);
+        }
 
         spriteRenderer.color = Color.red;
         Invoke("ResetSpriteColor", 0.1f);
     }
 
-    private void ResetSpriteColor() => spriteRenderer.color = Color.white;
+    private void ResetSpriteColor() => spriteRenderer.color = color;
 }

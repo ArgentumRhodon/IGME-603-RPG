@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        print("check status");
     }
 
     // Update is called once per frame
