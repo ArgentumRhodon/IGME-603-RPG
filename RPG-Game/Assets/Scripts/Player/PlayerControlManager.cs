@@ -20,7 +20,10 @@ public class PlayerControlManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerTransform = knight.activeSelf ? knight.transform : archer.transform;
+        if(playerMovement != null)
+        {
+            playerTransform = knight.activeSelf ? knight.transform : archer.transform;
+        }
     }
 
     public void OnSwitch()
