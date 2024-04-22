@@ -19,7 +19,6 @@ public class Power : MonoBehaviour
         damage = transform.gameObject.GetComponent<Damage>().amount;
         ischarge = false;
         powerup();
-        print("Ice = " + (int)Charge_type.Ice);
     }
 
     // Update is called once per frame
@@ -69,6 +68,8 @@ public class Power : MonoBehaviour
                 {
                     damage = 30;
                 }
+                break;
+            default:
                 break;
         }
         transform.gameObject.GetComponent<Damage>().amount = damage;
