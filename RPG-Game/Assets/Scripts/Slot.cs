@@ -44,7 +44,7 @@ public class Slot : MonoBehaviour
     }
     void equip(Charge c)
     {
-        if(GetComponentInParent<Inventory>().Charges.Find(x => x.c_type == c.c_type).equipped == false)
+        if (GetComponentInParent<Inventory>().Charges.Find(x => x.c_type == c.c_type).equipped == false)
         {
             GetComponentInParent<Inventory>().Charges.Find(x => x.c_type == c.c_type).equipped = true;
             cur_charge = c;
@@ -53,13 +53,13 @@ public class Slot : MonoBehaviour
         {
             print("This charge is in use");
         }
-        
+        GetComponentInChildren<Power>().powerup();
     }
     void unequip(Charge c)
     {
         GetComponentInParent<Inventory>().Charges.Find(x => x.c_type == c.c_type).equipped = false;
         cur_charge = null;
-        
+        GetComponentInChildren<Power>().powerup();
     }
     void equip(Potion p)
     {
