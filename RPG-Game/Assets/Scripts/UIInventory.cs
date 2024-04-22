@@ -8,25 +8,25 @@ public class UIInventory : MonoBehaviour
     public List<UISlot> PotionSlots;
 
     public Inventory inventory;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+       UpdatePowerUpSlot();
     }
+
     public void UpdatePowerUpSlot() 
     {
-        if (inventory.Charges.Count != 0) 
+        if (inventory != null && inventory.Charges.Count != 0)
         {
-            for (int i = 0; i< inventory.Charges.Count; i++) 
+            int count = Mathf.Min(inventory.Charges.Count, PowerUpSlots.Count); 
+            for (int i = 0; i < count; i++)
             {
                 Charge charge = inventory.Charges[i];
-                PowerUpSlots[i].UpdateImage(charge.sprite);
+                if (PowerUpSlots[i] != null)
+                {
+                    PowerUpSlots[i].UpdateImage(charge.sprite);
+                }
             }
         }
     }
