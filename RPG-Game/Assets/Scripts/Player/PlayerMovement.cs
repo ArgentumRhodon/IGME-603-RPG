@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     private float speed = 5f;
-    private Vector2 movementVector = Vector2.zero;
+    public Vector2 movementVector = Vector2.zero;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
