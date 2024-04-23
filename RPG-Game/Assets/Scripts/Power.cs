@@ -14,9 +14,11 @@ public class Power : MonoBehaviour
     public bool ischarge;
     public Charge_type c_type;
     public Player_type p_type;
+    public Damage[] Damage;
     void Start()
     {
-        damage = transform.gameObject.GetComponent<Damage>().amount;
+        Damage = GetComponentsInChildren<Damage>();
+        damage = 10;
         ischarge = false;
         powerup();
     }
@@ -28,15 +30,18 @@ public class Power : MonoBehaviour
     }
     public void powerup()
     {
-        if(transform.gameObject.GetComponentInParent<Slot>().cur_charge == null)
+        if(transform.gameObject.GetComponent<Slot>().cur_charge == null)
         {
             damage = 10;
             ischarge = false;
-            transform.gameObject.GetComponent<Damage>().amount = damage;
+            for (int i = 0; i < Damage.Length; i++)
+            {
+                Damage[i].amount = damage;
+            }
             return;
         }
         ischarge = true;
-        c_type = transform.gameObject.GetComponentInParent<Slot>().cur_charge.c_type;
+        c_type = transform.gameObject.GetComponent<Slot>().cur_charge.c_type;
         switch (c_type)
         {
             case Charge_type.Fire:
@@ -72,7 +77,10 @@ public class Power : MonoBehaviour
             default:
                 break;
         }
-        transform.gameObject.GetComponent<Damage>().amount = damage;
+        for(int i = 0; i < Damage.Length; i++)
+        {
+            Damage[i].amount = damage;
+        }
     }
 }
 

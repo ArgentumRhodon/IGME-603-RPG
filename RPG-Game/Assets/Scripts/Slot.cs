@@ -10,7 +10,11 @@ public class Slot : MonoBehaviour
     // Start is called before the first frame update
     public Charge cur_charge;
     public Collider2D item;
-
+    public PowerButtonManager pbm;
+    public Sprite Sprite;
+    public Sprite Sprite_Fire;
+    public Sprite Sprite_Ice;
+    public Sprite Sprite_Lightening;
     void Start()
     {
         
@@ -23,45 +27,52 @@ public class Slot : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                print("E pressed");
+                //print("E pressed");
                 Charge c = item.transform.GetComponent<Charge>();
                 if (c != null)
                 {
                     pickup(c);
                     //equip(c);
-                    item.transform.position = new Vector3(-10, 4, 0);
+                    item.transform.position = new Vector3(-1000, 400, 0);
                 }
                 //else print("not charge");
                 Potion p = item.transform.GetComponent<Potion>();
                 if (p != null)
                 {
                     pickup(p);
-                    item.transform.position = new Vector3(-10, 4, 0);
+                    item.transform.position = new Vector3(-1000, 400, 0);
                 }
                 //else print("not potion");
             }
         }
     }
-    void equip(Charge c)
+    public void Equip(Charge c)
     {
         if (GetComponentInParent<Inventory>().Charges.Find(x => x.c_type == c.c_type).equipped == false)
         {
             GetComponentInParent<Inventory>().Charges.Find(x => x.c_type == c.c_type).equipped = true;
             cur_charge = c;
+            //if (c.c_type == Charge_type.Fire)
+            //    GetComponent<SpriteRenderer>().sprite = Sprite_Fire;
+            //if (c.c_type == Charge_type.Ice)
+            //    GetComponent<SpriteRenderer>().sprite = Sprite_Ice;
+            //if (c.c_type == Charge_type.Lightening)
+            //    GetComponent<SpriteRenderer>().sprite = Sprite_Lightening;
         }
         else
         {
             print("This charge is in use");
         }
-        GetComponentInChildren<Power>().powerup();
+        GetComponent<Power>().powerup();
     }
-    void unequip(Charge c)
+    public void Unequip(Charge c)
     {
         GetComponentInParent<Inventory>().Charges.Find(x => x.c_type == c.c_type).equipped = false;
         cur_charge = null;
-        GetComponentInChildren<Power>().powerup();
+        //GetComponent<SpriteRenderer>().sprite = Sprite;
+        GetComponent<Power>().powerup();
     }
-    void equip(Potion p)
+    public void Equip(Potion p)
     {
         //Depends on the type
     }
@@ -76,6 +87,7 @@ public class Slot : MonoBehaviour
         //Charge_List.Sort((x, y) => x.c_type.CompareTo(y.c_type));
         GetComponentInParent<Inventory>().Charges.Add(c);
         GetComponentInParent<Inventory>().Charges.Sort((x, y) => x.c_type.CompareTo(y.c_type));
+        pbm.UpdateBotton();
     }
     void pickup(Potion p)
     {
@@ -88,13 +100,13 @@ public class Slot : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Pick Up UI enable here
-        print("Press E to pick up");
+        //print("Press E to pick up");
         item = collision;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         //Pick Up UI disable here
-        print("Exit");
+        //print("Exit");
         item = null;
     }
     
