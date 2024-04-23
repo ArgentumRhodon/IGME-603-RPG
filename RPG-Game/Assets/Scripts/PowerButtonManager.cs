@@ -1,0 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PowerButtonManager : MonoBehaviour
+{
+    // Start is called before the first frame update
+    public List<Button> PowerBottons;
+    public Inventory Backpack;
+    public PlayerControlManager playerControlManager;
+    
+    void Start()
+    {
+        PowerBottons[0].onClick.AddListener(delegate { EquipPower(0); });
+        PowerBottons[1].onClick.AddListener(delegate { EquipPower(1); });
+        PowerBottons[2].onClick.AddListener(delegate { EquipPower(2); });
+        UpdateBotton();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    void EquipPower(int i)
+    {
+        
+        print(PlayerControlManager.Instance.currentPlayer.name);
+        print("Equip " + i);
+        if(PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge != null)
+            PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().Unequip(PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge);
+        PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().Equip(Backpack.Charges[i]);
+    }
+    public void UpdateBotton() 
+    {
+        print("Update");
+        int cnt = Backpack.Charges.Count;
+        print("cnt = " + PowerBottons.Count);
+        for(int i = 0; i < cnt; i++)
+        {
+            if (!Backpack.Charges[i].equipped)
+            {
+                PowerBottons[i].enabled = true;
+            }
+            else
+            {
+                PowerBottons[i].enabled = false;
+            }    
+        }
+        if (cnt < 3)
+        {
+            for (int i = cnt; i < 3; i++)
+            {
+                PowerBottons[i].enabled = false;
+            }
+        }
+    }
+}

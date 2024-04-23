@@ -10,6 +10,7 @@ public class Slot : MonoBehaviour
     // Start is called before the first frame update
     public Charge cur_charge;
     public Collider2D item;
+    public PowerButtonManager pbm;
 
     void Start()
     {
@@ -42,7 +43,7 @@ public class Slot : MonoBehaviour
             }
         }
     }
-    void equip(Charge c)
+    public void Equip(Charge c)
     {
         if (GetComponentInParent<Inventory>().Charges.Find(x => x.c_type == c.c_type).equipped == false)
         {
@@ -55,13 +56,13 @@ public class Slot : MonoBehaviour
         }
         GetComponentInChildren<Power>().powerup();
     }
-    void unequip(Charge c)
+    public void Unequip(Charge c)
     {
         GetComponentInParent<Inventory>().Charges.Find(x => x.c_type == c.c_type).equipped = false;
         cur_charge = null;
         GetComponentInChildren<Power>().powerup();
     }
-    void equip(Potion p)
+    public void Equip(Potion p)
     {
         //Depends on the type
     }
@@ -76,6 +77,7 @@ public class Slot : MonoBehaviour
         //Charge_List.Sort((x, y) => x.c_type.CompareTo(y.c_type));
         GetComponentInParent<Inventory>().Charges.Add(c);
         GetComponentInParent<Inventory>().Charges.Sort((x, y) => x.c_type.CompareTo(y.c_type));
+        pbm.UpdateBotton();
     }
     void pickup(Potion p)
     {
