@@ -12,6 +12,10 @@ public class PlayerAttack : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [SerializeField]
     private GameObject swordCollider;
+    [SerializeField]
+    private GameObject upSwordCollider;
+    [SerializeField]
+    private GameObject downSwordCollider;
     private GameObject closestEnemy;
 
     // Start is called before the first frame update
@@ -21,6 +25,11 @@ public class PlayerAttack : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    /// <summary>
+    /// References the mouse position relative to the player to determine direction of attack
+    /// Mouse position is considered according to the quadrants formed by y=x and y=-x and the
+    /// directions they represent
+    /// </summary>
     private void OnAttack()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -52,22 +61,50 @@ public class PlayerAttack : MonoBehaviour
         animator.SetTrigger("Aim");
     }
 
+    private void AdjustColliderOrientation(GameObject collider)
+    {
+        if (spriteRenderer.flipX)
+        {
+            collider.transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            collider.transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+        }
+    }
+
+    // Attack Left/Right
     public void EnableSwordCollider()
     {
         swordCollider.SetActive(true);
 
-        if (spriteRenderer.flipX)
-        {
-            swordCollider.transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
-        }
-        else
-        {
-            swordCollider.transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
-        }
+        AdjustColliderOrientation(swordCollider);
     }
-
     public void DisableSwordCollider()
     {
         swordCollider.SetActive(false);
+    }
+
+    // Attack Up
+    public void EnableUpSwordCollider()
+    {
+        upSwordCollider.SetActive(true);
+        AdjustColliderOrientation(upSwordCollider);
+    }
+
+    public void DisableUpSwordCollider()
+    {
+        upSwordCollider.SetActive(false);
+    }
+
+    // Attack Down
+    public void EnableDownSwordCollider()
+    {
+        downSwordCollider.SetActive(true);
+        AdjustColliderOrientation(downSwordCollider);
+    }
+    public void DisableDownSwordCollider()
+    {
+        downSwordCollider.SetActive(false);
     }
 }

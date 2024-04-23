@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
         if(movementVector.magnitude > 0)
         {
             animator.SetBool("Run", true);
+
             if(movementVector.x != 0)
             {
                 spriteRenderer.flipX = movementVector.x < 0;
