@@ -193,8 +193,18 @@ public class TorcherBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(activeState == TorcherState.Dying)
+        {
+            return;
+        }
+
         Debug.Log($"{collision.gameObject.name} collided with {gameObject.name}");
         health.ReduceHealth(collision.gameObject.GetComponent<Damage>().amount);
+
+        spriteRenderer.color = Color.red;
+        Invoke("ResetSpriteColor", 0.1f);
+
+        if (collision.gameObject.GetComponent<Power>() == null) return;
 
         if (collision.gameObject.GetComponent<Power>().ischarge == false)
         {
@@ -208,9 +218,6 @@ public class TorcherBehavior : MonoBehaviour
             hit_kf = 1;
             print(playercombo);
         }
-
-        spriteRenderer.color = Color.red;
-        Invoke("ResetSpriteColor", 0.1f);
     }
 
     private void ResetSpriteColor() => spriteRenderer.color = color;
