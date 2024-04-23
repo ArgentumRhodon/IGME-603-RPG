@@ -24,7 +24,7 @@ public class Slot : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                print("E pressed");
+                //print("E pressed");
                 Charge c = item.transform.GetComponent<Charge>();
                 if (c != null)
                 {
@@ -54,13 +54,13 @@ public class Slot : MonoBehaviour
         {
             print("This charge is in use");
         }
-        GetComponentInChildren<Power>().powerup();
+        GetComponent<Power>().powerup();
     }
     public void Unequip(Charge c)
     {
         GetComponentInParent<Inventory>().Charges.Find(x => x.c_type == c.c_type).equipped = false;
         cur_charge = null;
-        GetComponentInChildren<Power>().powerup();
+        GetComponent<Power>().powerup();
     }
     public void Equip(Potion p)
     {
@@ -90,13 +90,13 @@ public class Slot : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Pick Up UI enable here
-        print("Press E to pick up");
+        //print("Press E to pick up");
         item = collision;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         //Pick Up UI disable here
-        print("Exit");
+        //print("Exit");
         item = null;
     }
     

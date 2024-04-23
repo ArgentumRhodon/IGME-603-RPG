@@ -8,7 +8,6 @@ public class PowerButtonManager : MonoBehaviour
     // Start is called before the first frame update
     public List<Button> PowerBottons;
     public Inventory Backpack;
-    public PlayerControlManager playerControlManager;
     
     void Start()
     {
@@ -25,7 +24,6 @@ public class PowerButtonManager : MonoBehaviour
     }
     void EquipPower(int i)
     {
-        
         print(PlayerControlManager.Instance.currentPlayer.name);
         print("Equip " + i);
         if(PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge != null)
@@ -36,7 +34,7 @@ public class PowerButtonManager : MonoBehaviour
     {
         print("Update");
         int cnt = Backpack.Charges.Count;
-        print("cnt = " + PowerBottons.Count);
+        //print("cnt = " + PowerBottons.Count);
         for(int i = 0; i < cnt; i++)
         {
             if (!Backpack.Charges[i].equipped)
