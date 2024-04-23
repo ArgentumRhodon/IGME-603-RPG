@@ -14,6 +14,7 @@ public class PowerButtonManager : MonoBehaviour
         PowerBottons[0].onClick.AddListener(delegate { EquipPower(0); });
         PowerBottons[1].onClick.AddListener(delegate { EquipPower(1); });
         PowerBottons[2].onClick.AddListener(delegate { EquipPower(2); });
+        PowerBottons[3].onClick.AddListener(UnEquipPower);
         UpdateBotton();
     }
 
@@ -29,6 +30,12 @@ public class PowerButtonManager : MonoBehaviour
         if(PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge != null)
             PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().Unequip(PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge);
         PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().Equip(Backpack.Charges[i]);
+    }
+    void UnEquipPower()
+    {
+        print("Unequip");
+        if (PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge != null)
+            PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().Unequip(PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge);
     }
     public void UpdateBotton() 
     {

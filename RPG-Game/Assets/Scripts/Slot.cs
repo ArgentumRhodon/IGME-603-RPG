@@ -11,7 +11,10 @@ public class Slot : MonoBehaviour
     public Charge cur_charge;
     public Collider2D item;
     public PowerButtonManager pbm;
-
+    public Sprite Sprite;
+    public Sprite Sprite_Fire;
+    public Sprite Sprite_Ice;
+    public Sprite Sprite_Lightening;
     void Start()
     {
         
@@ -30,14 +33,14 @@ public class Slot : MonoBehaviour
                 {
                     pickup(c);
                     //equip(c);
-                    item.transform.position = new Vector3(-10, 4, 0);
+                    item.transform.position = new Vector3(-1000, 400, 0);
                 }
                 //else print("not charge");
                 Potion p = item.transform.GetComponent<Potion>();
                 if (p != null)
                 {
                     pickup(p);
-                    item.transform.position = new Vector3(-10, 4, 0);
+                    item.transform.position = new Vector3(-1000, 400, 0);
                 }
                 //else print("not potion");
             }
@@ -49,6 +52,12 @@ public class Slot : MonoBehaviour
         {
             GetComponentInParent<Inventory>().Charges.Find(x => x.c_type == c.c_type).equipped = true;
             cur_charge = c;
+            //if (c.c_type == Charge_type.Fire)
+            //    GetComponent<SpriteRenderer>().sprite = Sprite_Fire;
+            //if (c.c_type == Charge_type.Ice)
+            //    GetComponent<SpriteRenderer>().sprite = Sprite_Ice;
+            //if (c.c_type == Charge_type.Lightening)
+            //    GetComponent<SpriteRenderer>().sprite = Sprite_Lightening;
         }
         else
         {
@@ -60,6 +69,7 @@ public class Slot : MonoBehaviour
     {
         GetComponentInParent<Inventory>().Charges.Find(x => x.c_type == c.c_type).equipped = false;
         cur_charge = null;
+        //GetComponent<SpriteRenderer>().sprite = Sprite;
         GetComponent<Power>().powerup();
     }
     public void Equip(Potion p)
