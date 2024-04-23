@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,44 +12,36 @@ public class PlayerAttack : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [SerializeField]
     private GameObject swordCollider;
-    private GameObject enemies;
+    private GameObject closestEnemy;
 
     // Start is called before the first frame update
     void Start()
     {
-        enemies = GameObject.FindFirstObjectByType<TorcherBehavior>().gameObject;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnAttack()
     {
-        /*if (EventSystem.current.IsPointerOverGameObject())
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float mx = mousePosition.x - transform.position.x;
+        float my = mousePosition.y - transform.position.y;
+
+        if(-mx <= my && my <= mx) 
         {
-            Debug.Log("Clicked");
-            return;
-        }*/
-        //animator.SetTrigger("Attack");
-        float dist = transform.position.y - enemies.transform.position.y;
-        if (dist == 0 || Mathf.Abs(dist) > 1)
-        {
+            spriteRenderer.flipX = false;
             animator.SetTrigger("Attack");
         }
-    }
-
-    private void OnAttackUp()
-    {
-        float dist = transform.position.y - enemies.transform.position.y;
-        if (dist < 0 && Mathf.Abs(dist) < 1)
+        else if(mx < my && my < -mx)
+        {
+            spriteRenderer.flipX = true;
+            animator.SetTrigger("Attack");
+        }
+        else if(my > -mx && my > mx)
         {
             animator.SetTrigger("AttackUp");
         }
-    }
-
-    private void OnAttackDown()
-    {
-        float dist = transform.position.y - enemies.transform.position.y;
-        if (dist > 0 && Mathf.Abs(dist) < 1)  
+        else
         {
             animator.SetTrigger("AttackDown");
         }
