@@ -33,8 +33,9 @@ public class PlayerAttack : MonoBehaviour
     private void OnAttack()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         float mx = mousePosition.x - transform.position.x;
-        float my = mousePosition.y - transform.position.y;
+        float my = mousePosition.y - transform.position.y - 1;
 
         if(-mx <= my && my <= mx) 
         {
