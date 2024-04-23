@@ -25,10 +25,10 @@ public class PauseMenu : MonoBehaviour
         {
             TogglePause();
         }
-        /*if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             ShowPlayerStates();
-        }*/
+        }
     }
 
     public void TogglePause() 
