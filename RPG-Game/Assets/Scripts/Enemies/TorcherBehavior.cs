@@ -12,15 +12,20 @@ public class TorcherBehavior : MonoBehaviour
 {
     private TorcherState activeState;
 
-    private GameObject player;
+    public GameObject player;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Health health;
+
+    private PlayerControlManager playerControlManager;
+
+
     public int playercombo;
     public float timer;
     public int hit_kf;
     public float speed;
     private Color color;
+
     [SerializeField]
     private GameObject torchCollider;
 
@@ -29,20 +34,26 @@ public class TorcherBehavior : MonoBehaviour
     {
         activeState = TorcherState.Idle;
 
-        player = GameObject.FindFirstObjectByType<PlayerMovement>().gameObject;
+        //player = GameObject.FindFirstObjectByType<PlayerMovement>().gameObject;
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
+
+        playerControlManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PlayerControlManager>();
+        player = playerControlManager.currentPlayer;
+
         playercombo = 0;
         timer = 0;
         speed = 1;
         color = Color.white;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player == null) return; 
+        player = playerControlManager.currentPlayer;
+        if (player == null) return; 
 
         float playerHealth = player.GetComponent<PlayerHealth>().currentHealth;
         float sqrDistToPlayer = Vector2.SqrMagnitude(transform.position - player.transform.position);
