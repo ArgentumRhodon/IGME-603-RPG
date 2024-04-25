@@ -36,7 +36,8 @@ public class DynamiterBehavior : MonoBehaviour
         if (player == null) return;
 
         float playerHealth = player.GetComponent<PlayerHealth>().currentHealth;
-        float sqrDistToPlayer = Vector2.SqrMagnitude(transform.position - player.transform.position);
+        Vector2 displacementToPlayer = transform.position - player.transform.position;
+        float sqrDistToPlayer = Vector2.SqrMagnitude(displacementToPlayer);
 
         if (playerHealth <= 0)
         {
@@ -59,6 +60,7 @@ public class DynamiterBehavior : MonoBehaviour
                 break;
             case DynamiterState.Throwing:
                 if (sqrDistToPlayer > 10) StateExit(DynamiterState.SeekPlayer);
+                spriteRenderer.flipX = displacementToPlayer.x > 0;
                 break;
         }
 
