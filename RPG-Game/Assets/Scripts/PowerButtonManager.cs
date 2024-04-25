@@ -27,7 +27,7 @@ public class PowerButtonManager : MonoBehaviour
     {
         print(PlayerControlManager.Instance.currentPlayer.name);
         print("Equip " + i);
-        if(PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge != null)
+        if(PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge != null && !Backpack.Charges[i].equipped)
             PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().Unequip(PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge);
         PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().Equip(Backpack.Charges[i]);
     }
