@@ -315,7 +315,7 @@ TextureImporter:
       name: Bridge_All_9
       rect:
         serializedVersion: 2
-        x: 128
+        x: 64
         y: 0
         width: 64
         height: 64
@@ -328,6 +328,27 @@ TextureImporter:
       bones: []
       spriteID: e9c9f63922c169745987f06c1f0c4567
       internalID: -52630468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bridge_All_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ee1043fb4126a24683ef4193d154425
+      internalID: 88319771
       vertices: []
       indices: 
       edges: []
@@ -345,6 +366,7 @@ TextureImporter:
     nameFileIdTable:
       Bridge_All_0: -1992944408
       Bridge_All_1: 445792295
+      Bridge_All_10: 88319771
       Bridge_All_2: 749361583
       Bridge_All_3: -1161884719
       Bridge_All_4: -2090659873

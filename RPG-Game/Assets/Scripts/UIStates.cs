@@ -17,7 +17,7 @@ public class UIStates : MonoBehaviour
     public TMP_Text charactername;
     public TMP_Text HP;
     public TMP_Text Attack;
-    public UISlot equipment;
+    public Image CurrentCharge;
 
     // Update is called once per frame
     void Update()
@@ -45,11 +45,15 @@ public class UIStates : MonoBehaviour
         Attack.text = "Attack: " + attack;
         Slot chargeslot = knight.GetComponent<Slot>();
         Charge currentcharge = chargeslot.cur_charge;
-        if (currentcharge != null) 
+        if (PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge != null)
         {
-            equipment.UpdateImage(currentcharge.sprite);
+            CurrentCharge.gameObject.SetActive(true);
+            CurrentCharge.sprite = PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge.sprite;
         }
-        else equipment.Reset();
+        else
+        {
+            CurrentCharge.gameObject.SetActive(false);
+        }
 
     }
 
@@ -66,10 +70,14 @@ public class UIStates : MonoBehaviour
         Attack.text = "Attack: " + attack;
         Slot chargeslot = archer.GetComponent<Slot>();
         Charge currentcharge = chargeslot.cur_charge;
-        if (currentcharge != null)
+        if (PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge != null)
         {
-            equipment.UpdateImage(currentcharge.sprite);
+            CurrentCharge.gameObject.SetActive(true);
+            CurrentCharge.sprite = PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge.sprite;
         }
-        else equipment.Reset();
+        else
+        {
+            CurrentCharge.gameObject.SetActive(false);
+        }
     }
 }

@@ -131,6 +131,11 @@ public class TNTMimicBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(activeState == MimicState.Exploding || activeState == MimicState.Lit)
+        {
+            return;
+        }
+
         Debug.Log($"{collision.gameObject.name} collided with {gameObject.name}");
 
         health.ReduceHealth(collision.gameObject.GetComponent<Damage>().amount);

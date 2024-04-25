@@ -19,7 +19,7 @@ public class UIInventory : MonoBehaviour
 
     void Update()
     {
-       UpdatePowerUpSlot();
+        UpdatePowerUpSlot();
     }
 
     public void initializedPowerSlot() 
@@ -42,15 +42,15 @@ public class UIInventory : MonoBehaviour
             for (int i = 0; i < count; i++)
             {
                 Charge charge = inventory.Charges[i];
-                Debug.Log("get sprite");
+                //Debug.Log("get sprite");
                 if (powerupslots[i] != null)
                 {
-                    Debug.Log(" have Sprite");
+                    //Debug.Log(" have Sprite");
                     powerupslots[i].UpdateImage(charge.sprite);
-                    Debug.Log("Change Sprite");
+                    //Debug.Log("Change Sprite");
                 }
-                else
-                    Debug.Log(PowerUpSlots[i] != null);
+                //else
+                    //Debug.Log(PowerUpSlots[i] != null);
             }
         }
     }

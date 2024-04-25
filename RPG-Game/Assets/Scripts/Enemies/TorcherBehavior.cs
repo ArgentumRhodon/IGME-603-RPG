@@ -90,11 +90,13 @@ public class TorcherBehavior : MonoBehaviour
             case 0:
                 break;
             case 1:
-                color = new Vector4(1,0.5f,0,1);
+                color = new Vector4(0.8f,0.4f,0,1);
                 if(timer < hit_kf && (timer + Time.deltaTime) >= hit_kf)
                 {
                     hit_kf ++;
                     health.ReduceHealth(2);
+                    spriteRenderer.color = Color.red;
+                    Invoke("ResetSpriteColor", 0.1f);
                 }
                 if(hit_kf > 5)
                 {
@@ -193,24 +195,31 @@ public class TorcherBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"{collision.gameObject.name} collided with {gameObject.name}");
-        health.ReduceHealth(collision.gameObject.GetComponent<Damage>().amount);
+        if(activeState == TorcherState.Dying)
+        {
+            return;
+        }
 
-        if (collision.gameObject.GetComponent<Power>().ischarge == false)
+        Debug.Log($"{collision.gameObject.name} collided with {gameObject.name}");
+        health.ReduceHealth(collision.gameObject.GetComponentInParent<Power>().damage);
+
+        spriteRenderer.color = Color.red;
+        Invoke("ResetSpriteColor", 0.1f);
+
+        if (collision.gameObject.GetComponentInParent<Power>() == null) return;
+
+        if (collision.gameObject.GetComponentInParent<Power>().ischarge == false)
         {
             print("no charge");
             playercombo = 0;
         }  
         else
         {
-            playercombo = (int)collision.gameObject.GetComponent<Power>().p_type * 3 + (int)collision.gameObject.GetComponent<Power>().c_type + 1;
+            playercombo = (int)collision.gameObject.GetComponentInParent<Power>().p_type * 3 + (int)collision.gameObject.GetComponentInParent<Power>().c_type + 1;
             timer = 0;
             hit_kf = 1;
             print(playercombo);
         }
-
-        spriteRenderer.color = Color.red;
-        Invoke("ResetSpriteColor", 0.1f);
     }
 
     private void ResetSpriteColor() => spriteRenderer.color = color;

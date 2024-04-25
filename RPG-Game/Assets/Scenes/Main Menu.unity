@@ -1263,7 +1263,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: '"WASD" To move
 
-    Left Click to attack'
+    Left Click to attack
+
+    "E" to interact'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 970ef599dd2c5274f93bdd0ff6fb051c, type: 2}
   m_sharedMaterial: {fileID: -4707995462969804947, guid: 970ef599dd2c5274f93bdd0ff6fb051c, type: 2}

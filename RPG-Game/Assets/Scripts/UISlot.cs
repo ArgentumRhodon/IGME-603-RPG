@@ -5,6 +5,7 @@ public class UISlot : MonoBehaviour
 {
     [SerializeField]
     public Image image;
+    public int index;
 
     public void UpdateImage(Sprite newsprite) 
     {
