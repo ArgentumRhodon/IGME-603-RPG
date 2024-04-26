@@ -36,6 +36,8 @@ public class PlayerAttack : MonoBehaviour
     private Transform SpawnPointUp;
     [SerializeField]
     private Transform SpawnPointDown;
+    [SerializeField]
+    private Transform ArrowParent;
 
     private float ArrowSpeed = 5f;
 
@@ -111,25 +113,25 @@ public class PlayerAttack : MonoBehaviour
 
     public void CastRight()
     {
-        Instantiate(Arrow, SpawnPointRight.position, SpawnPointRight.rotation);
+        Instantiate(Arrow, SpawnPointRight.position, SpawnPointRight.rotation, ArrowParent);
         Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
     }
 
     public void CastLeft()
     {
-        Instantiate(Arrow, SpawnPointLeft.position, SpawnPointLeft.rotation);
+        Instantiate(Arrow, SpawnPointLeft.position, SpawnPointLeft.rotation, ArrowParent);
         Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
     }
 
     public void CastUp()
     {
-        Instantiate(Arrow, SpawnPointUp.position, SpawnPointUp.rotation);
+        Instantiate(Arrow, SpawnPointUp.position, SpawnPointUp.rotation, ArrowParent);
         Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
     }
 
     public void CastDown()
     {
-        Instantiate(Arrow, SpawnPointDown.position, SpawnPointDown.rotation);
+        Instantiate(Arrow, SpawnPointDown.position, SpawnPointDown.rotation, ArrowParent);
         Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
     }
 
