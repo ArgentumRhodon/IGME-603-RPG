@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shoot Front
+  m_Name: Shoot Down
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,23 +21,23 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -2241963674231102270, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+      value: {fileID: -1742825191413217014, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
     - time: 0.099999905
-      value: {fileID: -3400808621196420687, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+      value: {fileID: -5329053085969022079, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
     - time: 0.19999981
-      value: {fileID: -8584117841906925932, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
-    - time: 0.29999995
-      value: {fileID: 1761224279260252370, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
-    - time: 0.39999986
-      value: {fileID: 891472266582559220, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+      value: {fileID: 5577996990891723778, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+    - time: 0.3000002
+      value: {fileID: 1838113716586588672, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+    - time: 0.4000001
+      value: {fileID: 5469255845784862983, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
     - time: 0.5
-      value: {fileID: -514674704361282586, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+      value: {fileID: 6140411720386595400, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
     - time: 0.5999999
-      value: {fileID: -2632976062834025086, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+      value: {fileID: 2673223146585066115, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
     - time: 0.6999998
-      value: {fileID: -8353781437593279774, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+      value: {fileID: -7468689513989161444, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
     - time: 0.79999983
-      value: {fileID: -8353781437593279774, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+      value: {fileID: -7468689513989161444, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -60,15 +60,15 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -2241963674231102270, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
-    - {fileID: -3400808621196420687, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
-    - {fileID: -8584117841906925932, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
-    - {fileID: 1761224279260252370, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
-    - {fileID: 891472266582559220, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
-    - {fileID: -514674704361282586, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
-    - {fileID: -2632976062834025086, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
-    - {fileID: -8353781437593279774, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
-    - {fileID: -8353781437593279774, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+    - {fileID: -1742825191413217014, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+    - {fileID: -5329053085969022079, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+    - {fileID: 5577996990891723778, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+    - {fileID: 1838113716586588672, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+    - {fileID: 5469255845784862983, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+    - {fileID: 6140411720386595400, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+    - {fileID: 2673223146585066115, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+    - {fileID: -7468689513989161444, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
+    - {fileID: -7468689513989161444, guid: 734e24496a0e1b145badd05d4707e129, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -95,14 +95,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.6
-    functionName: EnableSpawnPointRight
+    functionName: EnableSpawnPointDown
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.8
-    functionName: DisableSpawnPointRight
+    functionName: DisableSpawnPointDown
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
