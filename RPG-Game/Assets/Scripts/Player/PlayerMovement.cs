@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("Run", true);
 
-            if(movementVector.x != 0)
+            if (movementVector.x != 0)
             {
                 spriteRenderer.flipX = movementVector.x < 0;
             }
@@ -34,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Run", false);
         }
     }
-
     private void FixedUpdate()
     {
         transform.position += (Vector3)movementVector * Time.fixedDeltaTime * speed;

@@ -17,10 +17,37 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     private GameObject downSwordCollider;
     private GameObject closestEnemy;
+
+    private SpawnArrow spawnArrow;
+    [SerializeField]
+    private GameObject Arrow;
+    [SerializeField]
+    private GameObject SpawnRight;
+    [SerializeField]
+    private GameObject SpawnLeft;
+    [SerializeField]
+    private GameObject SpawnUp;
+    [SerializeField]
+    private GameObject SpawnDown;
+    [SerializeField]
+    private Transform SpawnPointRight;
+    [SerializeField]
+    private Transform SpawnPointLeft;
+    [SerializeField]
+    private Transform SpawnPointUp;
+    [SerializeField]
+    private Transform SpawnPointDown;
+    [SerializeField]
+    private Transform ArrowParent;
+
+    private float ArrowSpeed = 5f;
+
+
     
     public GameObject swordCollider1x; 
     public GameObject upSwordCollider1x;    
     public GameObject downSwordCollider1x;
+
 
     public GameObject swordCollider2x;
     public GameObject upSwordCollider2x;
@@ -30,6 +57,7 @@ public class PlayerAttack : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spawnArrow = GetComponent<SpawnArrow>();
     }
 
     /// <summary>
@@ -80,7 +108,55 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnAim()
     {
-        animator.SetTrigger("Aim");
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        float mx = mousePosition.x - transform.position.x;
+        float my = mousePosition.y - transform.position.y - 1;
+
+        if (-mx <= my && my <= mx)
+        {
+            spriteRenderer.flipX = false;
+            animator.SetTrigger("Aim");
+        }
+        else if (mx < my && my < -mx)
+        {
+            spriteRenderer.flipX = true;
+
+            animator.SetTrigger("Aim");
+        }
+        else if (my > -mx && my > mx)
+        {
+            animator.SetTrigger("AimUp");
+        }
+        else
+        {
+            animator.SetTrigger("AimDown");
+        }
+        //animator.SetTrigger("Aim");
+    }
+
+    public void CastRight()
+    {
+        Instantiate(Arrow, SpawnPointRight.position, SpawnPointRight.rotation, ArrowParent);
+        Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+    }
+
+    public void CastLeft()
+    {
+        Instantiate(Arrow, SpawnPointLeft.position, SpawnPointLeft.rotation, ArrowParent);
+        Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+    }
+
+    public void CastUp()
+    {
+        Instantiate(Arrow, SpawnPointUp.position, SpawnPointUp.rotation, ArrowParent);
+        Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+    }
+
+    public void CastDown()
+    {
+        Instantiate(Arrow, SpawnPointDown.position, SpawnPointDown.rotation, ArrowParent);
+        Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
     }
 
     private void AdjustColliderOrientation(GameObject collider)
@@ -128,5 +204,47 @@ public class PlayerAttack : MonoBehaviour
     public void DisableDownSwordCollider()
     {
         downSwordCollider.SetActive(false);
+    }
+
+    public void EnableSpawnPointRight()
+    {
+        if (spriteRenderer.flipX == false) 
+        {
+            SpawnRight.SetActive(true);
+            CastRight();
+        }
+        else
+        {
+            SpawnLeft.SetActive(true);
+            CastLeft();
+        }
+    }
+
+    public void DisableSpawnPointRight()
+    {
+        SpawnRight.SetActive(false);
+        SpawnLeft.SetActive(false);
+    }
+
+    public void EnableSpawnPointUp()
+    {
+        SpawnUp.SetActive(true);
+        CastUp();
+    }
+
+    public void DisableSpawnPointUp()
+    {
+        SpawnUp.SetActive(false);
+    }
+
+    public void EnableSpawnPointDown()
+    {
+        SpawnDown.SetActive(true);
+        CastDown();
+    }
+
+    public void DisableSpawnPointDown()
+    {
+        SpawnDown.SetActive(false);
     }
 }
