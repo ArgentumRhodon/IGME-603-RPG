@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     private GameObject downSwordCollider;
     private GameObject closestEnemy;
+
     private SpawnArrow spawnArrow;
     [SerializeField]
     private GameObject Arrow;
@@ -42,6 +43,15 @@ public class PlayerAttack : MonoBehaviour
     private float ArrowSpeed = 5f;
 
 
+    
+    public GameObject swordCollider1x; 
+    public GameObject upSwordCollider1x;    
+    public GameObject downSwordCollider1x;
+
+
+    public GameObject swordCollider2x;
+    public GameObject upSwordCollider2x;
+    public GameObject downSwordCollider2x;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +65,20 @@ public class PlayerAttack : MonoBehaviour
     /// Mouse position is considered according to the quadrants formed by y=x and y=-x and the
     /// directions they represent
     /// </summary>
+    public void use2xcollider()
+    {
+        swordCollider = swordCollider2x;
+        upSwordCollider = upSwordCollider2x;
+        downSwordCollider = downSwordCollider2x;
+        print("2x");
+    }
+    public void use1xcollider()
+    {
+        swordCollider = swordCollider1x;
+        upSwordCollider = upSwordCollider1x;
+        downSwordCollider = downSwordCollider1x;
+        print("1x");
+    }
     private void OnAttack()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
