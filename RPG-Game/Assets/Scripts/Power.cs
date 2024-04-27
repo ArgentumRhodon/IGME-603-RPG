@@ -15,7 +15,6 @@ public class Power : MonoBehaviour
     public Charge_type c_type;
     public Player_type p_type;
     public Damage[] Damage;
-    public PlayerAttack KnightAttack;
     void Start()
     {
         Damage = GetComponentsInChildren<Damage>();
@@ -49,7 +48,6 @@ public class Power : MonoBehaviour
                 if(p_type == Player_type.Knight)
                 {
                     damage = 15;
-                    KnightAttack.use1xcollider();
                 }
                 if(p_type == Player_type.Archer)
                 {
@@ -60,7 +58,6 @@ public class Power : MonoBehaviour
                 if (p_type == Player_type.Knight)
                 {
                     damage = 10;
-                    KnightAttack.use1xcollider();
                 }
                 if (p_type == Player_type.Archer)
                 {
@@ -71,7 +68,6 @@ public class Power : MonoBehaviour
                 if (p_type == Player_type.Knight)
                 {
                     damage = 10;
-                    KnightAttack.use2xcollider();
                 }
                 if (p_type == Player_type.Archer)
                 {

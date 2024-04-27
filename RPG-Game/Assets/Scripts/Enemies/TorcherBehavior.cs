@@ -123,8 +123,6 @@ public class TorcherBehavior : MonoBehaviour
                 timer += Time.deltaTime;
                 break;
             case 3:
-                spriteRenderer.color = Color.yellow;
-                Invoke("ResetSpriteColor", 0.1f);
                 break;
             case 4:
                 break;

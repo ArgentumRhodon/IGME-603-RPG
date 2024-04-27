@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,91 +121,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Wood_Tower_Red_0
-      rect:
-        serializedVersion: 2
-        x: 63
-        y: 0
-        width: 130
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d5c92352e89e6ea4d86bbb2e20df9ef6
-      internalID: 597017484
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wood_Tower_Red_2
-      rect:
-        serializedVersion: 2
-        x: 319
-        y: 0
-        width: 130
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 19fc9e6237377e14fadf6aa10a697949
-      internalID: -782217979
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wood_Tower_Red_4
-      rect:
-        serializedVersion: 2
-        x: 575
-        y: 0
-        width: 130
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: afb3e45b9fde4c746933885b336eea6e
-      internalID: 167363254
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wood_Tower_Red_6
-      rect:
-        serializedVersion: 2
-        x: 831
-        y: 0
-        width: 130
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d09a4ca0bbfe31c42b2970d3774e2dd8
-      internalID: 1787735183
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -216,14 +132,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Wood_Tower_Red_0: 597017484
-      Wood_Tower_Red_1: -1327007134
-      Wood_Tower_Red_2: -782217979
-      Wood_Tower_Red_3: 2054043419
-      Wood_Tower_Red_4: 167363254
-      Wood_Tower_Red_5: -994788590
-      Wood_Tower_Red_6: 1787735183
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
