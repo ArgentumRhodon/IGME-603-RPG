@@ -1,14 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class PlayerControlManager : MonoBehaviour
 {
-    public GameObject knight;
-    public GameObject archer;
+    public GameObject[] knights;
+    public GameObject[] archers;
+
+    public GameObject knightbasic;
+    public GameObject archerbasic;
     private Transform playerTransform;
+    private int selectedCharacter = 0;
+
     public GameObject currentPlayer;
+    public GameObject newPlayer;
     private PlayerMovement playerMovement;
     // Start is called before the first frame update
     private static PlayerControlManager _instance;
@@ -27,8 +35,8 @@ public class PlayerControlManager : MonoBehaviour
     }
     void Start()
     {
-        archer.SetActive(false);
-        currentPlayer = knight;
+        archerbasic.SetActive(false);
+        currentPlayer = knightbasic;
         playerMovement = currentPlayer.GetComponent<PlayerMovement>();
     }
 
@@ -37,27 +45,73 @@ public class PlayerControlManager : MonoBehaviour
     {
         if(playerMovement != null)
         {
-            playerTransform = knight.activeSelf ? knight.transform : archer.transform;
+            playerTransform = knightbasic.activeSelf ? knightbasic.transform : archerbasic.transform;
         }
     }
 
     public void OnSwitch()
     {
-        if (knight.activeInHierarchy == true)
+        if (knightbasic.activeInHierarchy == true)
         {
             playerMovement.movementVector = Vector2.zero;
-            currentPlayer = archer;
-            archer.transform.position = playerTransform.position;
-            archer.SetActive(true);
-            knight.SetActive(false);
+            currentPlayer = archerbasic;
+            archerbasic.transform.position = playerTransform.position;
+            archerbasic.SetActive(true);
+            knightbasic.SetActive(false);
         }
         else
         {
             playerMovement.movementVector = Vector2.zero;
-            currentPlayer = knight;
-            knight.transform.position = playerTransform.position;
-            knight.SetActive(true);
-            archer.SetActive(false);
+            currentPlayer = knightbasic;
+            knightbasic.transform.position = playerTransform.position;
+            knightbasic.SetActive(true);
+            archerbasic.SetActive(false);
+        }
+    }
+
+    public void OnKnightSwitchType()
+    {
+        if (selectedCharacter == 3)
+        {
+            selectedCharacter = 0;
+        }
+        else
+        {
+            selectedCharacter++;
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            if (i != selectedCharacter)
+            {
+                knights[i].SetActive(false);
+            }
+            else
+            {
+                knights[selectedCharacter].SetActive(true);
+            }
+        }
+    }
+
+    public void OnArcherSwitchType()
+    {
+        if (selectedCharacter == 3)
+        {
+            selectedCharacter = 0;
+        }
+        else
+        {
+            selectedCharacter++;
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            if (i != selectedCharacter)
+            {
+                archers[i].SetActive(false);
+            }
+            else
+            {
+                archers[selectedCharacter].SetActive(true);
+            }
         }
     }
 }
