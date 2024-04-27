@@ -20,6 +20,13 @@ public class TNTMimicBehavior : MonoBehaviour
     private Animator animator;
     private Health health;
 
+    public int playercombo;
+    public float timer;
+    public bool iced;
+    public float speed;
+    private Color color;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +36,12 @@ public class TNTMimicBehavior : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
+
+        playercombo = 0;
+        timer = 0;
+        speed = 1;
+        color = Color.white;
+        iced = false;
     }
 
     // Update is called once per frame
@@ -56,7 +69,7 @@ public class TNTMimicBehavior : MonoBehaviour
             case MimicState.SeekPlayer:
                 SeekPlayer();
                 // if (sqrDistToPlayer > 5) StateExit(MimicState.Idle);
-                if (sqrDistToPlayer < 0.5) StateExit(MimicState.Lit);
+                if (sqrDistToPlayer < 0.5 && !iced) StateExit(MimicState.Lit);
                 break;
             case MimicState.Lit:
                 break;
@@ -64,16 +77,51 @@ public class TNTMimicBehavior : MonoBehaviour
                 break;
         }
 
-        if (health.currentHealth <= 0 && activeState != MimicState.Lit && activeState != MimicState.Exploding)
+        if (health.currentHealth <= 0 && activeState != MimicState.Lit && activeState != MimicState.Exploding && !iced)
         {
             StateExit(MimicState.Lit);
+        }
+        switch (playercombo)
+        {
+            case 0:
+                break;
+            case 1:
+                StateExit(MimicState.Exploding);
+                break;
+            case 2:
+                speed = 0.40f;
+                color = new Vector4(0, 0.5f, 1, 1);
+                if (timer > 1)
+                {
+                    iced = false;
+                    playercombo = 0;
+                    timer = 0;
+                    speed = 1;
+                    color = Color.white;
+                    spriteRenderer.color = color;
+                    break;
+                }
+                timer += Time.deltaTime;
+                break;
+            case 3:
+                spriteRenderer.color = Color.yellow;
+                Invoke("ResetSpriteColor", 0.1f);
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            default:
+                break;
         }
     }
 
     private void SeekPlayer()
     {
         Vector2 movement = (player.transform.position - transform.position).normalized * Time.deltaTime;
-        this.transform.position += (Vector3)movement;
+        this.transform.position += speed * (Vector3)movement;
 
         spriteRenderer.flipX = movement.x < 0;
     }
@@ -138,11 +186,32 @@ public class TNTMimicBehavior : MonoBehaviour
 
         Debug.Log($"{collision.gameObject.name} collided with {gameObject.name}");
 
-        health.ReduceHealth(collision.gameObject.GetComponent<Damage>().amount);
-
         spriteRenderer.color = Color.red;
         Invoke("ResetSpriteColor", 0.1f);
+        if (collision.gameObject.GetComponentInParent<Power>() == null) return;
+
+        if (collision.gameObject.GetComponentInParent<Power>().ischarge == false)
+        {
+            print("no charge");
+            playercombo = 0;
+        }
+        else
+        {
+            playercombo = (int)collision.gameObject.GetComponentInParent<Power>().p_type * 3 + (int)collision.gameObject.GetComponentInParent<Power>().c_type + 1;
+            //timer = 0;
+            //hit_kf = 1;
+            print("charge = " + playercombo);
+        }
+        if(playercombo != 2 && playercombo != 5)
+        {
+            health.ReduceHealth(collision.gameObject.GetComponent<Damage>().amount);
+        }
+        else
+        {
+            iced = true;
+            print("Iced");
+        }
     }
 
-    private void ResetSpriteColor() => spriteRenderer.color = Color.white;
+    private void ResetSpriteColor() => spriteRenderer.color = color;
 }

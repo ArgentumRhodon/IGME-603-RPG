@@ -90,7 +90,7 @@ public class TorcherBehavior : MonoBehaviour
             case 0:
                 break;
             case 1:
-                color = new Vector4(0.8f,0.4f,0,1);
+                color = new Vector4(0.8f, 0.4f, 0,1f);
                 if(timer < hit_kf && (timer + Time.deltaTime) >= hit_kf)
                 {
                     hit_kf ++;
@@ -109,7 +109,7 @@ public class TorcherBehavior : MonoBehaviour
                 timer += Time.deltaTime;
                 break;
             case 2:
-                speed = 0.75f;
+                speed = 0.40f;
                 color = new Vector4(0, 0.5f, 1, 1);
                 if(timer > 1)
                 {
