@@ -9,17 +9,21 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
+    private Transform parentTransform;
+
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        parentTransform = transform.parent.transform;
         print("check status");
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(parentTransform);
         if(movementVector.magnitude > 0)
         {
             animator.SetBool("Run", true);
@@ -36,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        transform.position += (Vector3)movementVector * Time.fixedDeltaTime * speed;
+        parentTransform.position += (Vector3)movementVector * Time.fixedDeltaTime * speed;
     }
 
     private void OnMove(InputValue value)

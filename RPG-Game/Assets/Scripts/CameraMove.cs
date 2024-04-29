@@ -10,7 +10,7 @@ public class CameraMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cam = this.GetComponent<Camera>();
+        cam = GetComponent<Camera>();
         playerPos = cam.WorldToScreenPoint(player.position);
     }
 
