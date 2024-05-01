@@ -20,18 +20,20 @@ public class CameraMove : MonoBehaviour
         playerPos = cam.WorldToScreenPoint(player.position);
         if (playerPos.x < 0)
         {
-            this.transform.position = new Vector3(this.transform.position.x - 16f, this.transform.position.y, this.transform.position.z);
+            this.transform.position = new Vector3(this.transform.position.x - 15.925f, this.transform.position.y, this.transform.position.z);
         }   
         else if (playerPos.x > Screen.width)
         {
-            this.transform.position = new Vector3(this.transform.position.x + 16f, this.transform.position.y, this.transform.position.z);
+            this.transform.position = new Vector3(this.transform.position.x + 15.925f, this.transform.position.y, this.transform.position.z);
         }
-        else if (playerPos.y < 0)
+        if (playerPos.y < 0)
         {
+            Debug.Log(playerPos);
             this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 8.96f, this.transform.position.z);
         }
         else if (playerPos.y > Screen.height)
         {
+            Debug.Log(playerPos);
             this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 8.96f, this.transform.position.z);
         }
     }
