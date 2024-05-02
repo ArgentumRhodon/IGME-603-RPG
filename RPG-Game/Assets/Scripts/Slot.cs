@@ -11,10 +11,12 @@ public class Slot : MonoBehaviour
     public Charge cur_charge;
     public Collider2D item;
     public PowerButtonManager pbm;
+    public PotionButtonManager potionButtonManager;
     public Sprite Sprite;
     public Sprite Sprite_Fire;
     public Sprite Sprite_Ice;
     public Sprite Sprite_Lightening;
+    private PlayerHealth playerHealth;
     void Start()
     {
         
@@ -74,8 +76,48 @@ public class Slot : MonoBehaviour
     }
     public void Equip(Potion p)
     {
-        //Depends on the type
+        if (GetComponentInParent<Inventory>().Potions.Find(x => x.p_type == p.p_type).Potion_equipped == false)
+        {
+            GetComponentInParent<Inventory>().Potions.Find(x => x.p_type == p.p_type).Potion_equipped = true;
+            //Depends on the type
+            if (p.p_type == Potion_type.Health)
+            {
+                PlayerControlManager.Instance.currentPlayer.GetComponent<PlayerHealth>().currentHealth += 20;
+            }
+
+            if (p.p_type == Potion_type.Attack)
+            {
+                StartCoroutine(IncreaseAttackValue());
+            }
+
+            if (p.p_type == Potion_type.BigHealth)
+            {
+                PlayerControlManager.Instance.currentPlayer.GetComponent<PlayerHealth>().currentHealth += 50;
+            }
+        }
+        else
+        {
+            print("This charge is in use");
+        }
     }
+
+    public void Unequip(Potion p)
+    {
+        GetComponentInParent<Inventory>().Potions.Find(x => x.p_type == p.p_type).Potion_equipped = false;
+    }
+
+    IEnumerator IncreaseAttackValue()
+    {
+        float startTime = Time.time;
+        while(Time.time - startTime < 60)
+        {
+            PlayerControlManager.Instance.currentPlayer.GetComponent<PlayerAttack>().damage = 15;
+            yield return new WaitForSeconds(1);
+        }
+        PlayerControlManager.Instance.currentPlayer.GetComponent<PlayerAttack>().damage = 10;
+        Debug.Log("One minute has passed!");
+    }
+
     void pickup(Charge c)
     {
         c.equipped = false;
@@ -91,11 +133,13 @@ public class Slot : MonoBehaviour
     }
     void pickup(Potion p)
     {
+        p.Potion_equipped = false;
         //Potion newp = new Potion();
         //newp.sprite = p.sprite;
         //newp.p_type = p.p_type;
         GetComponentInParent<Inventory>().Potions.Add(p);
         GetComponentInParent<Inventory>().Potions.Sort((x, y) => x.p_type.CompareTo(y.p_type));
+        potionButtonManager.UpdateButton();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
