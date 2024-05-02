@@ -8,12 +8,13 @@ public class Inventory : MonoBehaviour
     //public List<Weapon> Weapons;
     public List<Charge> Charges;
     public List<Potion> Potions;
-    
+    public int attackPotion;
     void Start()
     {
         //Weapons = new List<Weapon>();
         Charges = new List<Charge>();
         Potions = new List<Potion>();
+        attackPotion = 0;
     }
 
     // Update is called once per frame
