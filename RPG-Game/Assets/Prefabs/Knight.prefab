@@ -39,7 +39,7 @@ Transform:
   m_Children:
   - {fileID: 4168193917709086296}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2883205455623061615
 SpriteRenderer:
@@ -146,6 +146,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   swordCollider: {fileID: 4829885913273285173}
+  upSwordCollider: {fileID: 0}
+  downSwordCollider: {fileID: 0}
+  Arrow: {fileID: 0}
+  SpawnRight: {fileID: 0}
+  SpawnLeft: {fileID: 0}
+  SpawnUp: {fileID: 0}
+  SpawnDown: {fileID: 0}
+  SpawnPointRight: {fileID: 0}
+  SpawnPointLeft: {fileID: 0}
+  SpawnPointUp: {fileID: 0}
+  SpawnPointDown: {fileID: 0}
+  ArrowParent: {fileID: 0}
+  swordCollider1x: {fileID: 0}
+  upSwordCollider1x: {fileID: 0}
+  downSwordCollider1x: {fileID: 0}
+  swordCollider2x: {fileID: 0}
+  upSwordCollider2x: {fileID: 0}
+  downSwordCollider2x: {fileID: 0}
+  Arrow3x: 0
 --- !u!114 &2933311980902272336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  movementVector: {x: 0, y: 0}
 --- !u!114 &4198414237236949522
 MonoBehaviour:
   m_ObjectHideFlags: 0
