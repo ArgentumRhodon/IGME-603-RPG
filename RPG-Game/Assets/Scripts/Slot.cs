@@ -111,10 +111,10 @@ public class Slot : MonoBehaviour
         float startTime = Time.time;
         while(Time.time - startTime < 60)
         {
-            PlayerControlManager.Instance.currentPlayer.GetComponent<PlayerAttack>().damage = 15;
+            PlayerControlManager.Instance.currentPlayer.GetComponentInParent<Inventory>().attackPotion = 1;
             yield return new WaitForSeconds(1);
         }
-        PlayerControlManager.Instance.currentPlayer.GetComponent<PlayerAttack>().damage = 10;
+        PlayerControlManager.Instance.currentPlayer.GetComponentInParent<Inventory>().attackPotion = 0;
         Debug.Log("One minute has passed!");
     }
 
