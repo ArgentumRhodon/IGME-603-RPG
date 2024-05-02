@@ -34,7 +34,7 @@ public class Power : MonoBehaviour
     {
         if(transform.gameObject.GetComponent<Slot>().cur_charge == null)
         {
-            damage = 10;
+            damage = 10 + GetComponentInParent<Inventory>().attackPotion * 5;
             ischarge = false;
             if(KnightAttack != null)
             {
