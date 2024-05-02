@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+ using Unity.VisualScripting;
 using UnityEngine;
 
 enum DynamiterState
@@ -18,6 +18,11 @@ public class DynamiterBehavior : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Health health;
+    [SerializeField]
+    private GameObject dynamitePrefab;
+    [SerializeField]
+    private float timeSinceLastThrow = 0.0f;
+    private float secondsPerThrow = 2.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,13 +40,15 @@ public class DynamiterBehavior : MonoBehaviour
     {
         if (player == null) return;
 
+        timeSinceLastThrow += Time.deltaTime;
+
         float playerHealth = player.GetComponent<PlayerHealth>().currentHealth;
         Vector2 displacementToPlayer = transform.position - player.transform.position;
         float sqrDistToPlayer = Vector2.SqrMagnitude(displacementToPlayer);
 
         if (playerHealth <= 0)
         {
-            StateExit(DynamiterState.Idle);
+            StateEnter(DynamiterState.Idle);
             return;
         }
 
@@ -50,23 +57,35 @@ public class DynamiterBehavior : MonoBehaviour
             case DynamiterState.Idle:
                 if (sqrDistToPlayer < 35)
                 {
-                    StateExit(DynamiterState.SeekPlayer);
+                    StateEnter(DynamiterState.SeekPlayer);
                 }
                 break;
             case DynamiterState.SeekPlayer:
                 SeekPlayer();
-                if (sqrDistToPlayer <= 10) StateExit(DynamiterState.Throwing);
+                if (sqrDistToPlayer <= 10)
+                {
+                    StateEnter(DynamiterState.Throwing);
+                }
                 // if (sqrDistToPlayer < 0.5) StateExit(DynamiterState.Lit);
                 break;
             case DynamiterState.Throwing:
-                if (sqrDistToPlayer > 10) StateExit(DynamiterState.SeekPlayer);
+                if (sqrDistToPlayer > 10) StateEnter(DynamiterState.SeekPlayer);
+
+                if(timeSinceLastThrow >= secondsPerThrow)
+                {
+                    animator.SetTrigger("Throw");
+                    timeSinceLastThrow = 0;
+                }
+
                 spriteRenderer.flipX = displacementToPlayer.x > 0;
                 break;
         }
 
+        Debug.Log(activeState);
+
         if (health.currentHealth <= 0 && activeState != DynamiterState.Dying)
         {
-            StateExit(DynamiterState.Dying);
+            StateEnter(DynamiterState.Dying);
         }
     }
 
@@ -78,11 +97,28 @@ public class DynamiterBehavior : MonoBehaviour
         spriteRenderer.flipX = movement.x < 0;
     }
 
-    private void StateEnter(DynamiterState state)
+    private void ThrowDynamite()
     {
-        Debug.Log("Entering State: " + state);
+        Dynamite dynamite = Instantiate(dynamitePrefab).GetComponent<Dynamite>();
+        dynamite.transform.position = transform.position + new Vector3(0, 0.5f, -5);
+        dynamite.targetPosition = player.transform.position + new Vector3(0, 0.5f, 0);
+    }
 
-        switch (state)
+    private void StateEnter(DynamiterState nextState)
+    {
+        Debug.Log("Entering State: " + nextState);
+
+        switch (activeState)
+        {
+            case DynamiterState.SeekPlayer:
+                animator.SetBool("Run", false);
+                break;
+            case DynamiterState.Throwing:
+                animator.ResetTrigger("Throw");
+                break;
+        }
+
+        switch (nextState)
         {
             case DynamiterState.SeekPlayer:
                 animator.SetBool("Run", true);
@@ -91,26 +127,12 @@ public class DynamiterBehavior : MonoBehaviour
                 animator.SetTrigger("Death");
                 break;
             case DynamiterState.Throwing:
-                animator.SetBool("Throw", true);
+                timeSinceLastThrow = 0.0f;
+                animator.SetTrigger("Throw");
                 break;
         }
 
-        activeState = state;
-    }
-
-    private void StateExit(DynamiterState nextState)
-    {
-        switch (activeState)
-        {
-            case DynamiterState.SeekPlayer:
-                animator.SetBool("Run", false);
-                break;
-            case DynamiterState.Throwing:
-                animator.SetBool("Throw", false);
-                break;
-        }
-
-        StateEnter(nextState);
+        activeState = nextState;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
