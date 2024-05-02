@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8165934847364955795}
   - component: {fileID: 5408548900528654054}
   - component: {fileID: -8781493825590028441}
+  - component: {fileID: 6001906171346141226}
   m_Layer: 7
   m_Name: Arrow_0
   m_TagString: Weapon
@@ -173,3 +174,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArrowSpeed: 5
   destroyTime: 3
+  velocity: {x: 5, y: 0}
+--- !u!114 &6001906171346141226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8137826424249727753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba1a4fa998e538d47955cb6c079c4273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 0

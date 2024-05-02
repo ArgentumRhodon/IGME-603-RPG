@@ -16,6 +16,7 @@ public class Power : MonoBehaviour
     public Player_type p_type;
     public Damage[] Damage;
     public PlayerAttack KnightAttack;
+    public PlayerAttack ArcherAttack;
     void Start()
     {
         Damage = GetComponentsInChildren<Damage>();
@@ -35,6 +36,8 @@ public class Power : MonoBehaviour
         {
             damage = 10;
             ischarge = false;
+            KnightAttack.use1xcollider();
+            ArcherAttack.Arrow3x = false;
             for (int i = 0; i < Damage.Length; i++)
             {
                 Damage[i].amount = damage;
@@ -53,17 +56,19 @@ public class Power : MonoBehaviour
                 }
                 if(p_type == Player_type.Archer)
                 {
-                    damage = 50;
+                    ArcherAttack.Arrow3x = false;
+                    damage = 30;
                 }
                 break;
             case Charge_type.Ice:
                 if (p_type == Player_type.Knight)
                 {
-                    damage = 10;
+                    damage = 15;
                     KnightAttack.use1xcollider();
                 }
                 if (p_type == Player_type.Archer)
                 {
+                    ArcherAttack.Arrow3x = false;
                     damage = 10;
                 }
                 break;
@@ -75,7 +80,8 @@ public class Power : MonoBehaviour
                 }
                 if (p_type == Player_type.Archer)
                 {
-                    damage = 30;
+                    damage = 10;
+                    ArcherAttack.Arrow3x = true;
                 }
                 break;
             default:

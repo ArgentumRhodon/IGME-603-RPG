@@ -52,13 +52,17 @@ public class PlayerAttack : MonoBehaviour
     public GameObject swordCollider2x;
     public GameObject upSwordCollider2x;
     public GameObject downSwordCollider2x;
+
+    public bool Arrow3x;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spawnArrow = GetComponent<SpawnArrow>();
+        Arrow3x = false;
     }
+    
 
     /// <summary>
     /// References the mouse position relative to the player to determine direction of attack
@@ -137,26 +141,94 @@ public class PlayerAttack : MonoBehaviour
 
     public void CastRight()
     {
-        Instantiate(Arrow, SpawnPointRight.position, SpawnPointRight.rotation, ArrowParent);
-        Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+        if (Arrow3x)
+        {
+            Instantiate(Arrow, SpawnPointRight.position, SpawnPointRight.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+            Instantiate(Arrow, SpawnPointRight.position + new Vector3(0.0f, 0.2f, 0.0f), SpawnPointRight.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+            Instantiate(Arrow, SpawnPointRight.position - new Vector3(0.0f, 0.2f, 0.0f), SpawnPointRight.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+        }
+        else
+        {
+            Instantiate(Arrow, SpawnPointRight.position, SpawnPointRight.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+        }
+        
     }
 
     public void CastLeft()
     {
-        Instantiate(Arrow, SpawnPointLeft.position, SpawnPointLeft.rotation, ArrowParent);
-        Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+        if(Arrow3x)
+        {
+            Instantiate(Arrow, SpawnPointLeft.position, SpawnPointLeft.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+            Instantiate(Arrow, SpawnPointLeft.position + new Vector3(0.0f, 0.2f, 0.0f), SpawnPointLeft.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+            Instantiate(Arrow, SpawnPointLeft.position - new Vector3(0.0f, 0.2f, 0.0f), SpawnPointLeft.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+        }
+        else
+        {
+            Instantiate(Arrow, SpawnPointLeft.position, SpawnPointLeft.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+        }
+        
     }
 
     public void CastUp()
     {
-        Instantiate(Arrow, SpawnPointUp.position, SpawnPointUp.rotation, ArrowParent);
-        Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+        if (Arrow3x)
+        {
+            Instantiate(Arrow, SpawnPointUp.position, SpawnPointUp.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+            Instantiate(Arrow, SpawnPointUp.position + new Vector3(0.2f, 0.0f, 0.0f), SpawnPointUp.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+            Instantiate(Arrow, SpawnPointUp.position - new Vector3(0.2f, 0.0f, 0.0f), SpawnPointUp.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+        }
+        else
+        {
+            Instantiate(Arrow, SpawnPointUp.position, SpawnPointUp.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+        }
+        
     }
 
     public void CastDown()
     {
-        Instantiate(Arrow, SpawnPointDown.position, SpawnPointDown.rotation, ArrowParent);
-        Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+        if (Arrow3x)
+        {
+            Instantiate(Arrow, SpawnPointDown.position, SpawnPointDown.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+            Instantiate(Arrow, SpawnPointDown.position + new Vector3(0.2f, 0.0f, 0.0f), SpawnPointDown.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+            Instantiate(Arrow, SpawnPointDown.position - new Vector3(0.2f, 0.0f, 0.0f), SpawnPointDown.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+        }
+        else
+        {
+            Instantiate(Arrow, SpawnPointDown.position, SpawnPointDown.rotation, ArrowParent);
+            //Arrow.GetComponent<Rigidbody2D>().velocity = transform.right * ArrowSpeed;
+            Arrow.GetComponent<Arrow>().velocity = transform.right * ArrowSpeed;
+        }
+        
     }
 
     private void AdjustColliderOrientation(GameObject collider)
