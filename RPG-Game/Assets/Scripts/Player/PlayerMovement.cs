@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(parentTransform);
+        //Debug.Log(parentTransform);
         if(movementVector.magnitude > 0)
         {
             animator.SetBool("Run", true);

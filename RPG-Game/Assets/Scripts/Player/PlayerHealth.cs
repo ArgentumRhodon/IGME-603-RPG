@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void IncreaseHealth(float value)
     {
+        Debug.Log("Current: " + currentHealth);
         currentHealth += value;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }

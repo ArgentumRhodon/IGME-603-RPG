@@ -15,11 +15,13 @@ public class UIInventory : MonoBehaviour
     void Start()
     {
         initializedPowerSlot();
+        initializePotionSlot();
     }
 
     void Update()
     {
         UpdatePowerUpSlot();
+        UpdatePotionSlot();
     }
 
     public void initializedPowerSlot() 
@@ -51,6 +53,40 @@ public class UIInventory : MonoBehaviour
                 }
                 //else
                     //Debug.Log(PowerUpSlots[i] != null);
+            }
+        }
+    }
+
+
+    public void initializePotionSlot()
+    {
+        foreach (var slotGameObject in PotionSlots)
+        {
+            UISlot slot = slotGameObject.GetComponent<UISlot>();
+            if (slot != null)
+            {
+                potionslots.Add(slot);
+            }
+        }
+    }
+
+    public void UpdatePotionSlot()
+    {
+        if (inventory != null && inventory.Potions.Count != 0)
+        {
+            int count = Mathf.Min(inventory.Potions.Count, PotionSlots.Count);
+            for (int i = 0; i < count; i++)
+            {
+                Potion potion = inventory.Potions[i];
+                //Debug.Log("get sprite");
+                if (potionslots[i] != null)
+                {
+                    //Debug.Log(" have Sprite");
+                    potionslots[i].UpdateImage(potion.sprite);
+                    //Debug.Log("Change Sprite");
+                }
+                //else
+                //Debug.Log(PowerUpSlots[i] != null);
             }
         }
     }
