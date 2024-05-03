@@ -7,15 +7,15 @@ using TMPro;
 public class OnBoarding : MonoBehaviour
 {
     public TMP_Text displayText;
-    public GameObject OnboardingPanel;
-
+    public int panelIndex; 
+    private bool overlap;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (displayText.gameObject.activeSelf)
+            if (overlap)
             {
-                OnboardingPanel.SetActive(true);
+                ActivePanel.Instance.OpenPanel(panelIndex);
             }
         }
     }
@@ -25,19 +25,21 @@ public class OnBoarding : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             displayText.gameObject.SetActive(true);
-        }   
+            overlap = true;
+        }
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             displayText.gameObject.SetActive(false);
+            overlap = false;
         }
     }
 
-    public void ClosePanel() 
+    public void CloseCurrentPanel()
     {
-        OnboardingPanel.SetActive(false);
+        ActivePanel.Instance.ClosePanel(panelIndex);
     }
-
 }
