@@ -82,7 +82,7 @@ public class Slot : MonoBehaviour
             //Depends on the type
             if (p.p_type == Potion_type.Health)
             {
-                PlayerControlManager.Instance.currentPlayer.GetComponent<PlayerHealth>().currentHealth += 20;
+                PlayerControlManager.Instance.currentPlayer.GetComponent<PlayerHealth>().IncreaseHealth(20);
             }
 
             if (p.p_type == Potion_type.Attack)
@@ -92,7 +92,7 @@ public class Slot : MonoBehaviour
 
             if (p.p_type == Potion_type.BigHealth)
             {
-                PlayerControlManager.Instance.currentPlayer.GetComponent<PlayerHealth>().currentHealth += 50;
+                PlayerControlManager.Instance.currentPlayer.GetComponent<PlayerHealth>().IncreaseHealth(50);
             }
         }
         else
