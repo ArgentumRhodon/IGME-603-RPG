@@ -9,6 +9,7 @@ public class Slot : MonoBehaviour
 {
     // Start is called before the first frame update
     public Charge cur_charge;
+    public Potion cur_potion;
     public Collider2D item;
     public PowerButtonManager pbm;
     public PotionButtonManager potionButtonManager;
@@ -78,6 +79,7 @@ public class Slot : MonoBehaviour
     {
         if (GetComponentInParent<Inventory>().Potions.Find(x => x.p_type == p.p_type).Potion_equipped == false)
         {
+            cur_potion = p;
             GetComponentInParent<Inventory>().Potions.Find(x => x.p_type == p.p_type).Potion_equipped = true;
             //Depends on the type
             if (p.p_type == Potion_type.Health)
@@ -104,6 +106,7 @@ public class Slot : MonoBehaviour
     public void Unequip(Potion p)
     {
         GetComponentInParent<Inventory>().Potions.Find(x => x.p_type == p.p_type).Potion_equipped = false;
+        cur_potion = null;
     }
 
     IEnumerator IncreaseAttackValue()
