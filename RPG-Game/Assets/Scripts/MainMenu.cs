@@ -9,7 +9,7 @@ public class Menu : MonoBehaviour
     public GameObject ControlScene;
     public void OnPlayButton()
     {
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("CutScene");
     }
     public void OnQuitButton()
     {
