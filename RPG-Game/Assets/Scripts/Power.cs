@@ -17,12 +17,14 @@ public class Power : MonoBehaviour
     public Damage[] Damage;
     public PlayerAttack KnightAttack;
     public PlayerAttack ArcherAttack;
+    public SpriteRenderer SR;
     void Start()
     {
         Damage = GetComponentsInChildren<Damage>();
         damage = 10;
         ischarge = false;
         powerup();
+        SR = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class Power : MonoBehaviour
         {
             damage = 10 + GetComponentInParent<Inventory>().attackPotion * 5;
             ischarge = false;
+            SR.color = Color.white;
             if(KnightAttack != null)
             {
                 KnightAttack.use1xcollider();
@@ -55,10 +58,11 @@ public class Power : MonoBehaviour
         switch (c_type)
         {
             case Charge_type.Fire:
-                if(p_type == Player_type.Knight)
+                SR.color = new Vector4(0.8f, 0.4f, 0.0f, 1.0f);
+                if (p_type == Player_type.Knight)
                 {
                     damage = 15 + GetComponentInParent<Inventory>().attackPotion * 5;
-                    KnightAttack.use1xcollider();
+                    KnightAttack.use1xcollider();              
                 }
                 if(p_type == Player_type.Archer)
                 {
@@ -67,6 +71,7 @@ public class Power : MonoBehaviour
                 }
                 break;
             case Charge_type.Ice:
+                SR.color = new Vector4(0.0f, 0.4f, 0.8f, 1.0f);
                 if (p_type == Player_type.Knight)
                 {
                     damage = 15 + GetComponentInParent<Inventory>().attackPotion * 5;
@@ -79,6 +84,7 @@ public class Power : MonoBehaviour
                 }
                 break;
             case Charge_type.Lightening:
+                SR.color = new Vector4(0.6f, 0.6f, 0.0f, 1.0f);
                 if (p_type == Player_type.Knight)
                 {
                     damage = 10 + GetComponentInParent<Inventory>().attackPotion * 5;
