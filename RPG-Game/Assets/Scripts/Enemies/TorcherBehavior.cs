@@ -123,12 +123,20 @@ public class TorcherBehavior : MonoBehaviour
                 timer += Time.deltaTime;
                 break;
             case 3:
-                spriteRenderer.color = Color.yellow;
-                Invoke("ResetSpriteColor", 0.1f);
+                if(timer < 0.5)
+                {
+                    spriteRenderer.color = Color.yellow;
+                    Invoke("ResetSpriteColor", 0.1f);
+                    timer += Time.deltaTime;
+                }
                 break;
             case 4:
-                spriteRenderer.color = new Vector4(0.8f, 0.4f, 0, 1f);
-                Invoke("ResetSpriteColor", 0.1f);
+                if(timer < 0.5)
+                {
+                    spriteRenderer.color = new Vector4(0.8f, 0.4f, 0, 1f);
+                    Invoke("ResetSpriteColor", 0.1f);
+                    timer += Time.deltaTime;
+                }    
                 break;
             case 5:
                 speed = 0.0f;
@@ -145,8 +153,12 @@ public class TorcherBehavior : MonoBehaviour
                 timer += Time.deltaTime;
                 break;
             case 6:
-                spriteRenderer.color = Color.yellow;
-                Invoke("ResetSpriteColor", 0.1f);
+                if(timer < 0.5)
+                {
+                    spriteRenderer.color = Color.yellow;
+                    Invoke("ResetSpriteColor", 0.1f);
+                    timer += Time.deltaTime;
+                }      
                 break;
             default:
                 break;

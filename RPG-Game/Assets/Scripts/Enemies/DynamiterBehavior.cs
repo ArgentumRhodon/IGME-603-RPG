@@ -1,4 +1,4 @@
- using Unity.VisualScripting;
+using Unity.VisualScripting;
 using UnityEngine;
 
 enum DynamiterState
@@ -24,6 +24,12 @@ public class DynamiterBehavior : MonoBehaviour
     private float timeSinceLastThrow = 0.0f;
     private float secondsPerThrow = 2.0f;
 
+    public int playercombo;
+    public float timer;
+    public int hit_kf;
+    public float speed;
+    public Color color;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +39,11 @@ public class DynamiterBehavior : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
+
+        playercombo = 0;
+        timer = 0;
+        speed = 1;
+        color = Color.white;
     }
 
     // Update is called once per frame
@@ -86,6 +97,85 @@ public class DynamiterBehavior : MonoBehaviour
         if (health.currentHealth <= 0 && activeState != DynamiterState.Dying)
         {
             StateEnter(DynamiterState.Dying);
+        }
+        switch (playercombo)
+        {
+            case 0:
+                break;
+            case 1:
+                color = new Vector4(0.8f, 0.4f, 0, 1f);
+                if (timer < hit_kf && (timer + Time.deltaTime) >= hit_kf)
+                {
+                    hit_kf++;
+                    health.ReduceHealth(2);
+                    spriteRenderer.color = Color.red;
+                    Invoke("ResetSpriteColor", 0.1f);
+                }
+                if (hit_kf > 5)
+                {
+                    playercombo = 0;
+                    timer = 0;
+                    color = Color.white;
+                    spriteRenderer.color = color;
+                    break;
+                }
+                timer += Time.deltaTime;
+                break;
+            case 2:
+                speed = 0.40f;
+                color = new Vector4(0, 0.5f, 1, 1);
+                if (timer > 1)
+                {
+                    playercombo = 0;
+                    timer = 0;
+                    speed = 1;
+                    color = Color.white;
+                    spriteRenderer.color = color;
+                    break;
+                }
+                timer += Time.deltaTime;
+                break;
+            case 3:
+                if(timer < 0.5)
+                {
+                    spriteRenderer.color = Color.yellow;
+                    Invoke("ResetSpriteColor", 0.1f);
+                    timer += Time.deltaTime;
+                }
+                
+                break;
+            case 4:
+                if(timer < 0.5)
+                {
+                    spriteRenderer.color = new Vector4(0.8f, 0.4f, 0, 1f);
+                    Invoke("ResetSpriteColor", 0.1f);
+                    timer += Time.deltaTime;
+                }
+                break;
+            case 5:
+                speed = 0.0f;
+                color = new Vector4(0, 0.5f, 1, 1);
+                if (timer > 2)
+                {
+                    playercombo = 0;
+                    timer = 0;
+                    speed = 1;
+                    color = Color.white;
+                    spriteRenderer.color = color;
+                    break;
+                }
+                timer += Time.deltaTime;
+                break;
+            case 6:
+                if(timer < 0.5)
+                {
+                    spriteRenderer.color = Color.yellow;
+                    Invoke("ResetSpriteColor", 0.1f);
+                    timer += Time.deltaTime;
+                }   
+                break;
+            default:
+                break;
         }
     }
 
@@ -143,7 +233,22 @@ public class DynamiterBehavior : MonoBehaviour
 
         spriteRenderer.color = Color.red;
         Invoke("ResetSpriteColor", 0.1f);
+
+        if (collision.gameObject.GetComponentInParent<Power>() == null) return;
+
+        if (collision.gameObject.GetComponentInParent<Power>().ischarge == false)
+        {
+            print("no charge");
+            playercombo = 0;
+        }
+        else
+        {
+            playercombo = (int)collision.gameObject.GetComponentInParent<Power>().p_type * 3 + (int)collision.gameObject.GetComponentInParent<Power>().c_type + 1;
+            timer = 0;
+            hit_kf = 1;
+            print(playercombo);
+        }
     }
 
-    private void ResetSpriteColor() => spriteRenderer.color = Color.white;
+    private void ResetSpriteColor() => spriteRenderer.color = color;
 }
