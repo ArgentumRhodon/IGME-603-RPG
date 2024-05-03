@@ -16,6 +16,7 @@ public class Power : MonoBehaviour
     public Player_type p_type;
     public Damage[] Damage;
     public PlayerAttack KnightAttack;
+    public PlayerAttack ArcherAttack;
     void Start()
     {
         Damage = GetComponentsInChildren<Damage>();
@@ -33,8 +34,16 @@ public class Power : MonoBehaviour
     {
         if(transform.gameObject.GetComponent<Slot>().cur_charge == null)
         {
-            damage = 10;
+            damage = 10 + GetComponentInParent<Inventory>().attackPotion * 5;
             ischarge = false;
+            if(KnightAttack != null)
+            {
+                KnightAttack.use1xcollider();
+            }
+            if(ArcherAttack != null)
+            {
+                ArcherAttack.Arrow3x = false;
+            }
             for (int i = 0; i < Damage.Length; i++)
             {
                 Damage[i].amount = damage;
@@ -48,34 +57,37 @@ public class Power : MonoBehaviour
             case Charge_type.Fire:
                 if(p_type == Player_type.Knight)
                 {
-                    damage = 15;
+                    damage = 15 + GetComponentInParent<Inventory>().attackPotion * 5;
                     KnightAttack.use1xcollider();
                 }
                 if(p_type == Player_type.Archer)
                 {
-                    damage = 50;
+                    ArcherAttack.Arrow3x = false;
+                    damage = 30 + GetComponentInParent<Inventory>().attackPotion * 5;
                 }
                 break;
             case Charge_type.Ice:
                 if (p_type == Player_type.Knight)
                 {
-                    damage = 10;
+                    damage = 15 + GetComponentInParent<Inventory>().attackPotion * 5;
                     KnightAttack.use1xcollider();
                 }
                 if (p_type == Player_type.Archer)
                 {
-                    damage = 10;
+                    ArcherAttack.Arrow3x = false;
+                    damage = 10 + GetComponentInParent<Inventory>().attackPotion * 5;
                 }
                 break;
             case Charge_type.Lightening:
                 if (p_type == Player_type.Knight)
                 {
-                    damage = 10;
+                    damage = 10 + GetComponentInParent<Inventory>().attackPotion * 5;
                     KnightAttack.use2xcollider();
                 }
                 if (p_type == Player_type.Archer)
                 {
-                    damage = 30;
+                    damage = 10 + GetComponentInParent<Inventory>().attackPotion * 5;
+                    ArcherAttack.Arrow3x = true;
                 }
                 break;
             default:

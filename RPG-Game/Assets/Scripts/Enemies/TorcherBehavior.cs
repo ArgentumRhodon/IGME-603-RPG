@@ -127,10 +127,26 @@ public class TorcherBehavior : MonoBehaviour
                 Invoke("ResetSpriteColor", 0.1f);
                 break;
             case 4:
+                spriteRenderer.color = new Vector4(0.8f, 0.4f, 0, 1f);
+                Invoke("ResetSpriteColor", 0.1f);
                 break;
             case 5:
+                speed = 0.0f;
+                color = new Vector4(0, 0.5f, 1, 1);
+                if (timer > 2)
+                {
+                    playercombo = 0;
+                    timer = 0;
+                    speed = 1;
+                    color = Color.white;
+                    spriteRenderer.color = color;
+                    break;
+                }
+                timer += Time.deltaTime;
                 break;
             case 6:
+                spriteRenderer.color = Color.yellow;
+                Invoke("ResetSpriteColor", 0.1f);
                 break;
             default:
                 break;

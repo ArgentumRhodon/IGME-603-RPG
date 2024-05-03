@@ -86,9 +86,10 @@ public class TNTMimicBehavior : MonoBehaviour
             case 0:
                 break;
             case 1:
-                StateExit(MimicState.Exploding);
+                StateExit(MimicState.Lit);
                 break;
             case 2:
+                //activeState = MimicState.SeekPlayer;
                 speed = 0.40f;
                 color = new Vector4(0, 0.5f, 1, 1);
                 if (timer > 1)
@@ -108,10 +109,26 @@ public class TNTMimicBehavior : MonoBehaviour
                 Invoke("ResetSpriteColor", 0.1f);
                 break;
             case 4:
+                StateExit(MimicState.Lit);
                 break;
             case 5:
+                speed = 0.00f;
+                color = new Vector4(0, 0.5f, 1, 1);
+                if (timer > 1)
+                {
+                    iced = false;
+                    playercombo = 0;
+                    timer = 0;
+                    speed = 1;
+                    color = Color.white;
+                    spriteRenderer.color = color;
+                    break;
+                }
+                timer += Time.deltaTime;
                 break;
             case 6:
+                spriteRenderer.color = Color.yellow;
+                Invoke("ResetSpriteColor", 0.1f);
                 break;
             default:
                 break;
