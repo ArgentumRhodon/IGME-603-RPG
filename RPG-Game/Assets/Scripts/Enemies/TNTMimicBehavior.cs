@@ -77,6 +77,8 @@ public class TNTMimicBehavior : MonoBehaviour
                 break;
         }
 
+        Debug.Log(activeState);
+
         if (health.currentHealth <= 0 && activeState != MimicState.Lit && activeState != MimicState.Exploding && !iced)
         {
             StateExit(MimicState.Lit);
@@ -221,6 +223,7 @@ public class TNTMimicBehavior : MonoBehaviour
         }
         if(playercombo != 2 && playercombo != 5)
         {
+            Debug.Log("Damage taken!");
             health.ReduceHealth(collision.gameObject.GetComponent<Damage>().amount);
         }
         else
