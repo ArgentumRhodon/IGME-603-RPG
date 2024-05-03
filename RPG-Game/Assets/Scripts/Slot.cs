@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using static UnityEditor.Progress;
-using static UnityEngine.InputSystem.Editor.InputActionCodeGenerator;
+//using static UnityEditor.Progress;
+//using static UnityEngine.InputSystem.Editor.InputActionCodeGenerator;
 
 public class Slot : MonoBehaviour
 {
