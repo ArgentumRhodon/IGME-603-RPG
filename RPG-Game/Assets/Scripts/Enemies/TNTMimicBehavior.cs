@@ -83,12 +83,18 @@ public class TNTMimicBehavior : MonoBehaviour
         {
             StateExit(MimicState.Lit);
         }
+
+        Debug.Log(playercombo);
+
         switch (playercombo)
         {
             case 0:     // no charge on character
                 break;
             case 1:     // Knight with fire
-                StateExit(MimicState.Lit);
+                if(activeState != MimicState.Lit && activeState != MimicState.Exploding)
+                {
+                    StateExit(MimicState.Lit);
+                }
                 break;
             case 2:     // Knight with ice
                 //activeState = MimicState.SeekPlayer;
@@ -111,7 +117,10 @@ public class TNTMimicBehavior : MonoBehaviour
                 Invoke("ResetSpriteColor", 0.1f);
                 break;
             case 4:     // Archer with fire
-                StateExit(MimicState.Lit);
+                if (activeState != MimicState.Lit && activeState != MimicState.Exploding)
+                {
+                    StateExit(MimicState.Lit);
+                }
                 break;
             case 5:     // Archer with ice
                 speed = 0.00f;
