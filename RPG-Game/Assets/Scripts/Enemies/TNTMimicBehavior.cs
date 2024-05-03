@@ -85,12 +85,12 @@ public class TNTMimicBehavior : MonoBehaviour
         }
         switch (playercombo)
         {
-            case 0:
+            case 0:     // no charge on character
                 break;
-            case 1:
+            case 1:     // Knight with fire
                 StateExit(MimicState.Lit);
                 break;
-            case 2:
+            case 2:     // Knight with ice
                 //activeState = MimicState.SeekPlayer;
                 speed = 0.40f;
                 color = new Vector4(0, 0.5f, 1, 1);
@@ -106,14 +106,14 @@ public class TNTMimicBehavior : MonoBehaviour
                 }
                 timer += Time.deltaTime;
                 break;
-            case 3:
+            case 3:     // Knight with lightening
                 spriteRenderer.color = Color.yellow;
                 Invoke("ResetSpriteColor", 0.1f);
                 break;
-            case 4:
+            case 4:     // Archer with fire
                 StateExit(MimicState.Lit);
                 break;
-            case 5:
+            case 5:     // Archer with ice
                 speed = 0.00f;
                 color = new Vector4(0, 0.5f, 1, 1);
                 if (timer > 1)
@@ -128,7 +128,7 @@ public class TNTMimicBehavior : MonoBehaviour
                 }
                 timer += Time.deltaTime;
                 break;
-            case 6:
+            case 6:     // Archer with lightening
                 spriteRenderer.color = Color.yellow;
                 Invoke("ResetSpriteColor", 0.1f);
                 break;
@@ -221,7 +221,7 @@ public class TNTMimicBehavior : MonoBehaviour
             //hit_kf = 1;
             print("charge = " + playercombo);
         }
-        if(playercombo != 2 && playercombo != 5)
+        if(playercombo != 2 && playercombo != 5)    // character not with powerup of ice
         {
             Debug.Log("Damage taken!");
             health.ReduceHealth(collision.gameObject.GetComponent<Damage>().amount);
