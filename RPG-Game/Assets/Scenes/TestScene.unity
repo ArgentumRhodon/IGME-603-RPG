@@ -38421,7 +38421,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 19, y: 0}
+  m_AnchoredPosition: {x: 19, y: -12.999985}
   m_SizeDelta: {x: 240, y: 16}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &627479413
@@ -44123,7 +44123,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1427776339}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
@@ -45645,7 +45645,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 19, y: 0}
+  m_AnchoredPosition: {x: 19, y: -13}
   m_SizeDelta: {x: 240, y: 16}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1818827600
@@ -46751,7 +46751,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 135, y: 0}
+  m_AnchoredPosition: {x: 135, y: -12.999985}
   m_SizeDelta: {x: 100, y: 100.10791}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &2064142178
@@ -46928,7 +46928,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 19, y: 0}
+  m_AnchoredPosition: {x: 19, y: -12.999985}
   m_SizeDelta: {x: 240, y: 16}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2075711796
