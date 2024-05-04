@@ -67,6 +67,9 @@ public class PlayerControlManager : MonoBehaviour
             knightbasic.SetActive(true);
             archerbasic.SetActive(false);
         }
+
+        // Increment tracked swap data
+        DataTimer.playData.swaps += 1;
     }
 
     public void OnKnightSwitchType()
