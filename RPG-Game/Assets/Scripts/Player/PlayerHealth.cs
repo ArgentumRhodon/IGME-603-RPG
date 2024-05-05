@@ -22,7 +22,13 @@ public class PlayerHealth : MonoBehaviour
     public void IncreaseHealth(float value)
     {
         Debug.Log("Current: " + currentHealth);
-        currentHealth += value;
+        if(currentHealth < maxHealth - value)
+        {
+            currentHealth += value;
+        } else
+        {
+            currentHealth = maxHealth;
+        }
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
