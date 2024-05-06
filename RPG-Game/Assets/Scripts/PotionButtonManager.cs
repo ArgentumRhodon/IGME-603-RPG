@@ -14,7 +14,7 @@ public class PotionButtonManager : MonoBehaviour
         PotionButtons[0].onClick.AddListener(delegate { EquipPotion(0); });
         PotionButtons[1].onClick.AddListener(delegate { EquipPotion(1); });
         PotionButtons[2].onClick.AddListener(delegate { EquipPotion(2); });
-        PotionButtons[3].onClick.AddListener(UnEquipPotion);
+        PotionButtons[3].onClick.AddListener(delegate { EquipPotion(3); });
         UpdateButton();
     }
 
@@ -27,15 +27,9 @@ public class PotionButtonManager : MonoBehaviour
     {
         print(PlayerControlManager.Instance.currentPlayer.name);
         print("Equip " + i);
-        if (PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge != null && !Inventory_Potions.Potions[i].Potion_equipped)
-            PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().Unequip(PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge);
+        if (PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_potion != null && !Inventory_Potions.Potions[i].Potion_equipped)
+            PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().Unequip(PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_potion);
         PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().Equip(Inventory_Potions.Potions[i]);
-    }
-    void UnEquipPotion()
-    {
-        print("Unequip");
-        if (PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge != null)
-            PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().Unequip(PlayerControlManager.Instance.currentPlayer.GetComponent<Slot>().cur_charge);
     }
     public void UpdateButton()
     {
@@ -55,7 +49,7 @@ public class PotionButtonManager : MonoBehaviour
         }
         if (cnt < 3)
         {
-            for (int i = cnt; i < 3; i++)
+            for (int i = cnt; i < 4; i++)
             {
                 PotionButtons[i].enabled = false;
             }
